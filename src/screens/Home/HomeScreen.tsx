@@ -1,12 +1,10 @@
 import React, {FC} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
-import Child from './Child';
-
-const App: FC = () => {
+const HomeScreen: FC = () => {
   return (
     <View style={styles.container}>
-      <Child number={1}>コンポーネント</Child>
+      <Text>Home Screen</Text>
     </View>
   );
 };
@@ -19,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default HomeScreen;
