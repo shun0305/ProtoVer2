@@ -1,22 +1,21 @@
-import React, {FC} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import Child from './Child';
+import OnboardingScreen from './src/screens/Onboarding/OnboardingScreen';
+import Navigation from './src/screens/Navigation';
 
-const App: FC = () => {
+const Stack = createStackNavigator();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Child number={1}>コンポーネント</Child>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName={'home'}>
+        <Stack.Screen name="onboading" component={OnboardingScreen} />
+        <Stack.Screen name="home" component={Navigation} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
-export default App;
+}
