@@ -1,10 +1,19 @@
 import React, {FC} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
 
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
+import {users} from '../../Data/UserData';
 
 const HomeScreen: FC = () => {
+  console.log(users);
   return (
     <>
       <View style={styles.container}>
@@ -21,44 +30,28 @@ const HomeScreen: FC = () => {
         <View>
           <Text style={styles.listTitleText}>現在旅しているユーザー</Text>
         </View>
-        {/* ここからはFirebase導入後、FlatListを使ってリスト化する */}
-        <TouchableOpacity style={styles.listItemContainer}>
-          <View style={styles.listUserContainer}>
-            <Image
-              style={styles.image}
-              source={require('../../images/json.jpeg')}
-            />
-            <View>
-              <Text style={styles.listName}>伊藤 峻平</Text>
-              <Text style={styles.listPlace}>ニューヨーク,アメリカ合衆国</Text>
-            </View>
-          </View>
-          <TouchableOpacity>
-            <View style={styles.test}>
-              <Button style={styles.listButton}>
-                <Text style={styles.listButtonText}>GT</Text>
-              </Button>
-            </View>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.listItemContainer}>
-          <View style={styles.listUserContainer}>
-            <Image
-              style={styles.image}
-              source={require('../../images/female.jpeg')}
-            />
-            <View>
-              <Text style={styles.listName}>Hitomi</Text>
-              <Text style={styles.listPlace}>釜山,韓国</Text>
-            </View>
-          </View>
-          <TouchableOpacity>
-            <Button style={styles.listButton}>
-              <Text style={styles.listButtonText}>GT</Text>
-            </Button>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        {/* ここまで */}
+        {/* firebaseのデータに変更必要あり */}
+        <FlatList
+          data={users}
+          renderItem={({item}) => (
+            <TouchableOpacity style={styles.listItemContainer}>
+              <View style={styles.listUserContainer}>
+                <Image style={styles.image} source={{uri: item.profileImage}} />
+                <View>
+                  <Text style={styles.listName}>{item.username}</Text>
+                  <Text style={styles.listPlace}>
+                    {item.place[0]},{item.place[1]}
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity>
+                <Button style={styles.listButton}>
+                  <Text style={styles.listButtonText}>GT</Text>
+                </Button>
+              </TouchableOpacity>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </>
   );
