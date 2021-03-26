@@ -13,12 +13,12 @@ const Card: FC<ButtonProps> = props => {
 
 const styles = StyleSheet.create({
   button: {
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
+    shadowColor: 'gray',
+    shadowOpacity: 0.36,
     shadowOffset: {width: 0, height: 2},
     shadowRadius: 8,
     elevation: 5,
-    borderRadius: 10,
+    borderRadius: 30,
     backgroundColor: 'white',
   },
 });
