@@ -12,14 +12,16 @@ import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 
-const HomeScreen: FC = () => {
-  console.log(users);
+const HomeScreen: FC = props => {
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.textTop}>バックパッカーならではの</Text>
         <Text style={styles.textBottom}>経験を共有しよう！</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('depart');
+          }}>
           <Button style={styles.departButton}>
             <Text style={styles.buttonText}>出発する</Text>
           </Button>
