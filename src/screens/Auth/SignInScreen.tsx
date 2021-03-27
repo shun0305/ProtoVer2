@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import Colors from '../../constants/Color';
