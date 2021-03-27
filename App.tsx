@@ -1,41 +1,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
-import SignInScreen from './src/screens/Auth/SignInScreen';
-import OnboardingScreen from './src/screens/Onboarding/OnboardingScreen';
-import Navigation from './src/screens/Navigation';
-import PostScreen from './src/screens/Post/PostScreen';
-import HomeDepartScreen from './src/screens/Home/HomeDepart';
 
-const Stack = createStackNavigator();
+import AppStack from './src/screens/Navigation/AppStack';
 
 export default function App() {
+  const auth = true;
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'signin'}>
-        <Stack.Screen name="onboading" component={OnboardingScreen} />
-        <Stack.Screen
-          name="home"
-          component={Navigation}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="signin" component={SignInScreen} />
-        <Stack.Screen name="post" component={PostScreen} />
-        <Stack.Screen
-          name="depart"
-          component={HomeDepartScreen}
-          options={{
-            headerTitle: 'ステータスを旅行中にする',
-            headerRight: () => (
-              <HeaderBackButton
-                onPress={() => {
-                  // Do something
-                }}
-              />
-            ),
-          }}
-        />
-      </Stack.Navigator>
+      <AppStack />
     </NavigationContainer>
   );
 }

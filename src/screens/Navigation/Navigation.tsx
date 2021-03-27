@@ -3,12 +3,12 @@ import {View, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
-import Colors from '../constants/Color';
-import HomeScreen from '../screens/Home/HomeScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
-import PostScreen from '../screens/Post/PostScreen';
-import MessageScreen from '../screens/Message/MessageScreen';
-import AccountScreen from '../screens/Account/AccountScreen';
+import Colors from '../../constants/Color';
+import HomeScreen from '../Home/HomeScreen';
+import SearchScreen from '../Search/SearchScreen';
+import PostScreen from '../Post/PostScreen';
+import MessageScreen from '../Message/MessageScreen';
+import AccountScreen from '../Account/AccountScreen';
 
 const Tab = createBottomTabNavigator();
 
