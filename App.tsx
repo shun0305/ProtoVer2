@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
-
+import SignInScreen from './src/screens/Auth/SignInScreen';
 import OnboardingScreen from './src/screens/Onboarding/OnboardingScreen';
 import Navigation from './src/screens/Navigation';
 import PostScreen from './src/screens/Post/PostScreen';
@@ -12,13 +12,14 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={'home'}>
+      <Stack.Navigator initialRouteName={'signin'}>
         <Stack.Screen name="onboading" component={OnboardingScreen} />
         <Stack.Screen
           name="home"
           component={Navigation}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="signin" component={SignInScreen} />
         <Stack.Screen name="post" component={PostScreen} />
         <Stack.Screen
           name="depart"
