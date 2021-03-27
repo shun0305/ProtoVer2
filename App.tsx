@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
+import AuthStack from './src/screens/Navigation/AuthStack';
 import AppStack from './src/screens/Navigation/AppStack';
 
 export default function App() {
@@ -8,7 +9,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AppStack />
+      <AuthStack />
     </NavigationContainer>
   );
 }
