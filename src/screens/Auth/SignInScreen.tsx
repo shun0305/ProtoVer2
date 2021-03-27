@@ -7,6 +7,9 @@ import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
 
 const SignInScreen: FC = () => {
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>サービス名</Text>
@@ -15,11 +18,11 @@ const SignInScreen: FC = () => {
       </View>
       <Input
         placeholder="メールアドレス"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => setEmail(text)}
       />
       <Input
         placeholder="パスワード"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => setPassword(text)}
       />
       <Text style={styles.forgetPassword}>パスワードを忘れた方</Text>
       <TouchableOpacity onPress={() => {}}>

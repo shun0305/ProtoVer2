@@ -6,30 +6,34 @@ import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
 
-const SignUpScreen: FC = () => {
+const SignUpScreen: FC = props => {
+  const [name, setName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [confPassword, setConfPassword] = useState<string | null>(null);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>サービス名</Text>
       <View style={styles.signupContainer}>
         <Text style={styles.signup}>新規登録</Text>
       </View>
-      <Input
-        placeholder="ユーザー名"
-        onChangeText={text => console.log(text)}
-      />
+      <Input placeholder="ユーザー名" onChangeText={text => setName(text)} />
       <Input
         placeholder="メールアドレス"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => setEmail(text)}
       />
       <Input
         placeholder="パスワード"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => setPassword(text)}
       />
       <Input
         placeholder="パスワード(確認用)"
-        onChangeText={text => console.log(text)}
+        onChangeText={text => setConfPassword(text)}
       />
-      <Text style={styles.login}>ログイン</Text>
+      <TouchableOpacity onPress={() => props.navigation.navigate('signin')}>
+        <Text style={styles.login}>ログイン</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => {}}>
         <Button style={styles.signupButton}>
           <Text style={styles.buttonText}>新規登録</Text>
