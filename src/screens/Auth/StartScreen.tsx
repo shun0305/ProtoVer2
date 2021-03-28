@@ -1,10 +1,16 @@
 import React, {FC} from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 
+// type Props = {
+//   navigation: StackNavigationProp;
+// };
+
 const StartScreen: FC = props => {
+  const {navigation} = props;
   return (
     <View style={styles.screen}>
       <Image
@@ -13,14 +19,14 @@ const StartScreen: FC = props => {
       />
       <Text style={styles.title}>サービス名</Text>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('signup')}
+        onPress={() => navigation.navigate('signup')}
         style={styles.buttonContainer}>
         <Button style={styles.button}>
           <Text style={styles.buttonText}>新規登録</Text>
         </Button>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('signin')}
+        onPress={() => navigation.navigate('signin')}
         style={styles.buttonContainer}>
         <Button style={styles.button}>
           <Text style={styles.buttonText}>ログイン</Text>

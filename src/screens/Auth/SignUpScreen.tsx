@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     width: 160,
-    height: 40,
+    height: 45,
     backgroundColor: Colors.primaryColor,
     borderRadius: 15,
     justifyContent: 'center',

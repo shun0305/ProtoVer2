@@ -6,7 +6,9 @@ import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
 
-const SignInScreen: FC = () => {
+const SignInScreen: FC = props => {
+  const {navigation} = props;
+
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
 
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     width: 160,
-    height: 40,
+    height: 45,
     backgroundColor: Colors.primaryColor,
     borderRadius: 15,
     justifyContent: 'center',

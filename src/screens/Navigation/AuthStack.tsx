@@ -1,11 +1,9 @@
 import React, {FC} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import StartScreen from '../Auth/StartScreen';
 import SignInScreen from '../Auth/SignInScreen';
 import SignUpScreen from '../Auth/SignUpScreen';
-import {color} from 'react-native-reanimated';
 
 const {Navigator, Screen} = createStackNavigator();
 
