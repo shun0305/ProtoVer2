@@ -8,29 +8,36 @@ const SearchScreen: FC = () => {
   const [view, selectView] = useState<string>('list');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View>
       {view === 'list' ? (
-        <View>
-          <SearchBar placeholder="地名で検索" />
-          <Switch selectView={selectView} />
+        <View style={styles.container}>
+          <View style={styles.barAndButton}>
+            <SearchBar placeholder="地名で検索" />
+            <Switch selectView={selectView} />
+          </View>
           <Text>List Screen</Text>
         </View>
       ) : (
-        <View>
-          <SearchBar placeholder="地名で検索" />
-          <Switch selectView={selectView} />
-          <Text>Map Screen</Text>
+        <View style={styles.container}>
+          <View style={styles.barAndButton}>
+            <SearchBar placeholder="地名で検索" />
+            <Switch selectView={selectView} />
+            <Text>Map Screen</Text>
+          </View>
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
     backgroundColor: 'white',
+    paddingTop: 50,
+    alignItems: 'center',
+  },
+  barAndButton: {
+    alignItems: 'center',
   },
 });
 
