@@ -9,7 +9,7 @@ const SearchScreen: FC = () => {
   const [view, selectView] = useState<string>('list');
 
   return (
-    <View>
+    <View style={styles.screen}>
       {view === 'list' ? (
         <View style={styles.container}>
           <View style={styles.barAndButton}>
@@ -32,6 +32,10 @@ const SearchScreen: FC = () => {
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
   container: {
     backgroundColor: 'white',
     paddingTop: 50,

@@ -46,7 +46,7 @@ const HomeScreen: FC = props => {
       </View>
 
       {/* ここからはリスト部分の画面 */}
-      <View>
+      <View style={styles.listContainer}>
         <View>
           <Text style={styles.listTitleText}>現在旅しているユーザー</Text>
         </View>
@@ -147,6 +147,10 @@ const styles = StyleSheet.create({
   },
 
   // ここから下はリスト部分,後々FlatListに変更
+  listContainer: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
   listItemContainer: {
     flexDirection: 'row',
     marginBottom: 10,

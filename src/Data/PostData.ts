@@ -16,7 +16,7 @@ export const posts: Posts = [
     profileImage:
       'https://www.colorlines.com/sites/default/files/styles/article_lead_normal/public/images/articles/2018/10/black-women-breast-cancer-awareness-10-1-18.jpg?itok=F29Mihqw',
     place: ['釜山', '韓国'],
-    content: 'こんな所に喫煙所発見！<br>生き返る〜〜⤴︎⤴︎',
+    content: 'こんな所に喫煙所発見！生き返る〜〜⤴︎⤴︎',
     category: 'タバコ',
     info: 'profit',
     time: '2020.04.03',

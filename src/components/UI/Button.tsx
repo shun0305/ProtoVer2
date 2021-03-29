@@ -14,8 +14,8 @@ const Card: FC<ButtonProps> = props => {
 const styles = StyleSheet.create({
   button: {
     shadowColor: 'gray',
-    shadowOpacity: 0.36,
-    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowOffset: {width: 1, height: 2},
     shadowRadius: 8,
     elevation: 5,
     borderRadius: 30,
