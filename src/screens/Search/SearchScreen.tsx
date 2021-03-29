@@ -1,8 +1,9 @@
 import React, {FC, useState} from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import SearchBar from '../../components/UI/SearchBar';
 import Switch from '../../components/UI/Switch';
+import SearchListScreen from './SearchListScreen';
 
 const SearchScreen: FC = () => {
   const [view, selectView] = useState<string>('list');
@@ -15,7 +16,7 @@ const SearchScreen: FC = () => {
             <SearchBar placeholder="地名で検索" />
             <Switch selectView={selectView} />
           </View>
-          <Text>List Screen</Text>
+          <SearchListScreen />
         </View>
       ) : (
         <View style={styles.container}>
@@ -34,10 +35,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     paddingTop: 50,
-    alignItems: 'center',
   },
   barAndButton: {
     alignItems: 'center',
+    paddingBottom: 5,
   },
 });
 
