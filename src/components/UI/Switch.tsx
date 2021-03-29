@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 
 import Colors from '../../constants/Color';
 
-const Switch = () => {
+const Switch = props => {
+  const {selectView} = props;
   const options = [
     {
       label: 'リスト',
@@ -26,7 +27,7 @@ const Switch = () => {
       <View>
         <SwitchSelector
           initial={0}
-          onPress={value => console.log(`Call onPress with value: ${value}`)}
+          onPress={value => selectView(value)}
           textColor={Colors.primaryColor} //'#7a44cf'
           selectedColor="white"
           buttonColor={Colors.primaryColor}
