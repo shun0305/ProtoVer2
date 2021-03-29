@@ -23,7 +23,7 @@ const Navigation = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'ホーム',
           tabBarIcon: ({color}) => (
             <Icons name="home" color={color} size={26} />
           ),
@@ -33,7 +33,7 @@ const Navigation = () => {
         name="Search"
         component={SearchScreen}
         options={{
-          tabBarLabel: 'Search',
+          tabBarLabel: '探す',
           tabBarIcon: ({color}) => (
             <Icons name="search" color={color} size={26} />
           ),
@@ -43,6 +43,7 @@ const Navigation = () => {
         name="Post"
         component={PostScreen}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({}) => (
             <View style={styles.centerIcon}>
               <Icons name="add-location" color="white" size={40} />
@@ -54,7 +55,7 @@ const Navigation = () => {
         name="Message"
         component={MessageScreen}
         options={{
-          tabBarLabel: 'Message',
+          tabBarLabel: 'メッセージ',
           tabBarIcon: ({color}) => (
             <Icons name="message" color={color} size={26} />
           ),
@@ -64,7 +65,7 @@ const Navigation = () => {
         name="Account"
         component={AccountScreen}
         options={{
-          tabBarLabel: 'Account',
+          tabBarLabel: 'マイページ',
           tabBarIcon: ({color}) => (
             <Icons name="person" color={color} size={26} />
           ),
