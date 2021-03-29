@@ -1,19 +1,24 @@
 import React, {FC} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+
+import SearchBar from '../../components/UI/SearchBar';
 
 const SearchScreen: FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Search Screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View>
+        <SearchBar placeholder="地名で検索" />
+        <Text>Search Screen</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
 });
 
