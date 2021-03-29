@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {auth !== true ? <AppStack /> : <AuthStack />}
+      {auth == true ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

@@ -13,21 +13,39 @@ import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 
 const HomeScreen: FC = props => {
+  const isTraveling: boolean = true;
   return (
     <>
+      {/* isTravelingのbooleanで表示変更 */}
       <View style={styles.container}>
         <Text style={styles.textTop}>バックパッカーならではの</Text>
         <Text style={styles.textBottom}>経験を共有しよう！</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('depart');
-          }}>
-          <Button style={styles.departButton}>
-            <Text style={styles.buttonText}>出発する</Text>
-          </Button>
-        </TouchableOpacity>
+        {isTraveling !== true ? (
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('depart');
+            }}>
+            <Button style={styles.departButton}>
+              <Text style={styles.buttonText}>出発する</Text>
+            </Button>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('depart');
+            }}>
+            <Button style={styles.departingButton}>
+              <Text style={styles.buttonText}>{users[0].place[0]}</Text>
+              <View style={styles.gtButton}>
+                <Text style={styles.gtButtonText}>GT</Text>
+              </View>
+              <Text style={styles.gtCount}>4</Text>
+            </Button>
+          </TouchableOpacity>
+        )}
       </View>
 
+      {/* ここからはリスト部分の画面 */}
       <View>
         <View>
           <Text style={styles.listTitleText}>現在旅しているユーザー</Text>
@@ -85,6 +103,37 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  departingButton: {
+    width: 260,
+    height: 40,
+    backgroundColor: 'white',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  gtButton: {
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: Colors.primaryColor,
+    backgroundColor: Colors.primaryColor,
+    marginLeft: 15,
+  },
+  gtButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  gtCount: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.primaryColor,
+    marginLeft: 7,
   },
   buttonText: {
     fontSize: 20,
