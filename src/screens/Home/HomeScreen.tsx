@@ -13,7 +13,7 @@ import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 
 const HomeScreen: FC = props => {
-  const isTraveling: boolean = true;
+  const isTraveling: boolean = false;
   return (
     <>
       {/* isTravelingのbooleanで表示変更 */}

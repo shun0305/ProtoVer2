@@ -10,7 +10,10 @@ import {
 } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import {Marker} from 'react-native-maps';
+import Icons from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet from 'react-native-bottomsheet-reanimated';
+
+import Colors from '../../constants/Color';
 
 const INITIAL_REGION = {
   latitude: 40.754932,
@@ -40,20 +43,40 @@ const SearchMapScreen = () => {
   };
   return (
     <View>
-      <Button onPress={animateToRegion} title="Animate" />
+      <Button onPress={animateToRegion} title="move" />
       <MapView
         ref={mapRef}
         initialRegion={INITIAL_REGION}
+        clusterColor={Colors.primaryColor}
         style={{width: 600, height: 900}}>
-        <Marker coordinate={{latitude: 52.4, longitude: 18.7}} />
-        <Marker coordinate={{latitude: 52.1, longitude: 18.4}} />
-        <Marker coordinate={{latitude: 52.6, longitude: 18.3}} />
-        <Marker coordinate={{latitude: 51.6, longitude: 18.0}} />
-        <Marker coordinate={{latitude: 53.1, longitude: 18.8}} />
-        <Marker coordinate={{latitude: 52.9, longitude: 19.4}} />
-        <Marker coordinate={{latitude: 52.2, longitude: 21}} />
-        <Marker coordinate={{latitude: 52.4, longitude: 21}} />
-        <Marker coordinate={{latitude: 51.8, longitude: 20}} />
+        <Marker
+          coordinate={{latitude: 52.4, longitude: 18.7}}
+          pinColor="#D2691E">
+          <View style={styles.icon}>
+            <Icons name="directions-car" size={24} color="white" />
+          </View>
+        </Marker>
+        <Marker
+          coordinate={{latitude: 51.4, longitude: 18.7}}
+          pinColor="#D2691E">
+          <View style={styles.icon}>
+            <Icons name="attach-money" size={24} color="white" />
+          </View>
+        </Marker>
+        <Marker
+          coordinate={{latitude: 53.4, longitude: 16.7}}
+          pinColor="#D2691E">
+          <View style={styles.icon}>
+            <Icons name="smoking-rooms" size={24} color="white" />
+          </View>
+        </Marker>
+        <Marker
+          coordinate={{latitude: 52.4, longitude: 16.7}}
+          pinColor="#D2691E">
+          <View style={styles.icon}>
+            <Icons name="fastfood" size={24} color="white" />
+          </View>
+        </Marker>
       </MapView>
       {/*       
       <View style={styles.boxWrapper}>
@@ -118,6 +141,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  icon: {
+    backgroundColor: Colors.primaryColor,
+    borderRadius: 30,
+    padding: 5,
+    marginRight: 10,
+    marginLeft: 10,
+    width: 35,
   },
 });
 

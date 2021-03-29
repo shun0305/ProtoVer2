@@ -23,13 +23,7 @@ const AppStack: FC = () => {
         component={HomeDepartScreen}
         options={{
           headerTitle: 'ステータスを旅行中にする',
-          headerRight: () => (
-            <HeaderBackButton
-              onPress={() => {
-                // Do something
-              }}
-            />
-          ),
+          headerBackTitleVisible: false,
         }}
       />
     </Navigator>
