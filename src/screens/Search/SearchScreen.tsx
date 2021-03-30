@@ -6,7 +6,7 @@ import Switch from '../../components/UI/Switch';
 import SearchListScreen from './SearchListScreen';
 import SearchMapScreen from './SearchMapScreen';
 
-const SearchScreen: FC = () => {
+const SearchScreen: FC = props => {
   const [view, selectView] = useState<string>('list');
 
   return (
@@ -17,7 +17,7 @@ const SearchScreen: FC = () => {
             <SearchBar placeholder="地名で検索" />
             <Switch selectView={selectView} />
           </View>
-          <SearchListScreen />
+          <SearchListScreen navigation={props.navigation} />
         </View>
       ) : (
         <View style={styles.container}>

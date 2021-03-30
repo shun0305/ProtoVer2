@@ -14,7 +14,7 @@ import Button from '../../components/UI/Button';
 import {categories} from '../../Data/CategoryData';
 import {posts} from '../../Data/PostData';
 
-const SearchListScreen: FC = () => {
+const SearchListScreen: FC = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>カテゴリーで検索</Text>
@@ -34,7 +34,14 @@ const SearchListScreen: FC = () => {
       <FlatList
         data={posts}
         renderItem={({item}) => (
-          <TouchableOpacity style={styles.listItemContainer}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate('detail', {
+                content: item.content,
+                place: item.place,
+              })
+            }
+            style={styles.listItemContainer}>
             <View style={styles.listUserContainer}>
               <Image style={styles.image} source={{uri: item.profileImage}} />
               <View>
