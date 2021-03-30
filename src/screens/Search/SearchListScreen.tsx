@@ -37,8 +37,13 @@ const SearchListScreen: FC = props => {
           <TouchableOpacity
             onPress={() =>
               props.navigation.navigate('detail', {
+                username: item.username,
+                profileImage: item.profileImage,
                 content: item.content,
                 place: item.place,
+                category: item.category,
+                info: item.info,
+                time: item.time,
               })
             }
             style={styles.listItemContainer}>
