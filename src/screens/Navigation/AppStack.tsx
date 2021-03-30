@@ -1,5 +1,9 @@
 import React, {FC} from 'react';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderBackButton,
+  HeaderTitle,
+} from '@react-navigation/stack';
 
 import OnboardingScreen from '../Onboarding/OnboardingScreen';
 import Navigation from '../Navigation/Navigation';
@@ -30,10 +34,10 @@ const AppStack: FC = () => {
       <Screen
         name="detail"
         component={DetailScreen}
-        options={{
-          headerTitle: '詳細画面',
+        options={({route}) => ({
+          title: route.params.place[0] + ',' + route.params.place[1],
           headerBackTitleVisible: false,
-        }}
+        })}
       />
     </Navigator>
   );
