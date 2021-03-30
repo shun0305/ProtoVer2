@@ -14,6 +14,7 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet from 'react-native-bottomsheet-reanimated';
 
 import Colors from '../../constants/Color';
+import ButtomModal from '../../components/UI/Modal/BottomModal';
 
 const INITIAL_REGION = {
   latitude: 40.754932,
@@ -38,9 +39,9 @@ const SearchMapScreen = () => {
       latitudeDelta: 7.5,
       longitudeDelta: 7.5,
     };
-
     mapRef.current.animateToRegion(region, 2000);
   };
+
   return (
     <View>
       <Button onPress={animateToRegion} title="move" />
@@ -79,53 +80,7 @@ const SearchMapScreen = () => {
           </View>
         </Marker>
       </MapView>
-      <BottomSheet
-        bottomSheerColor="#FFFFFF"
-        ref={openRef}
-        initialPosition={'55%'}
-        snapPoints={snapPoints}
-        isBackDrop={true}
-        isBackDropDismissByPress={true}
-        isRoundBorderWithTipHeader={true}
-        // isModal
-        containerStyle={styles.modalContainer}
-        //tipStyle={styles.modalTip}
-        // headerStyle={{backgroundColor: 'red'}}
-        // bodyStyle={{backgroundColor: 'red', flex: 1}}
-        header={
-          <View style={styles.modalheader}>
-            <Text style={styles.modalheaderText}>カテゴリーで探す</Text>
-          </View>
-        }
-        body={
-          <View style={styles.modalbody}>
-            <TouchableOpacity style={styles.modalCategoryContainer}>
-              <View style={styles.modalIcon}>
-                <Icons name="fastfood" size={35} color="white" />
-              </View>
-              <Text>食べ物</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalCategoryContainer}>
-              <View style={styles.modalIcon}>
-                <Icons name="directions-car" size={35} color="white" />
-              </View>
-              <Text>交通</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalCategoryContainer}>
-              <View style={styles.modalIcon}>
-                <Icons name="smoking-rooms" size={35} color="white" />
-              </View>
-              <Text>タバコ</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalCategoryContainer}>
-              <View style={styles.modalIcon}>
-                <Icons name="attach-money" size={35} color="white" />
-              </View>
-              <Text>お金</Text>
-            </TouchableOpacity>
-          </View>
-        }
-      />
+      <ButtomModal snapPoints={snapPoints} openRef={openRef} />
     </View>
   );
 };
