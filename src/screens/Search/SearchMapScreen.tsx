@@ -22,11 +22,11 @@ const INITIAL_REGION = {
   longitudeDelta: 1.5,
 };
 
-// const Screen = {
-//   width: Dimensions.get('window').width,
-//   height: Dimensions.get('window').height,
-// };
-// const snapPoints = [0, Screen.height / 2, '70%', '100%'];
+const Screen = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
+};
+const snapPoints = [0, Screen.height / 2, '55%', '100%'];
 
 const SearchMapScreen = () => {
   const mapRef = useRef();
@@ -44,6 +44,7 @@ const SearchMapScreen = () => {
   return (
     <View>
       <Button onPress={animateToRegion} title="move" />
+      <Button onPress={() => openRef.current.snapTo(2)} title="modal" />
       <MapView
         ref={mapRef}
         initialRegion={INITIAL_REGION}
@@ -78,40 +79,53 @@ const SearchMapScreen = () => {
           </View>
         </Marker>
       </MapView>
-      {/*       
-      <View style={styles.boxWrapper}>
-        <TouchableOpacity onPress={() => openRef.current.snapTo(1)}>
-          <View style={styles.box}>
-            <Text>2</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-   
       <BottomSheet
         bottomSheerColor="#FFFFFF"
         ref={openRef}
-        initialPosition={'50%'}
+        initialPosition={'55%'}
         snapPoints={snapPoints}
         isBackDrop={true}
         isBackDropDismissByPress={true}
         isRoundBorderWithTipHeader={true}
         // isModal
-        // containerStyle={{backgroundColor:"red"}}
-        // tipStyle={{backgroundColor:"red"}}
-        // headerStyle={{backgroundColor:"red"}}
-        // bodyStyle={{backgroundColor:"red",flex:1}}
+        containerStyle={styles.modalContainer}
+        //tipStyle={styles.modalTip}
+        // headerStyle={{backgroundColor: 'red'}}
+        // bodyStyle={{backgroundColor: 'red', flex: 1}}
         header={
-          <View>
-            <Text style={styles.text}>Header</Text>
+          <View style={styles.modalheader}>
+            <Text style={styles.modalheaderText}>カテゴリーで探す</Text>
           </View>
         }
         body={
-          <View style={styles.body}>
-            <Text style={styles.text}>Body</Text>
+          <View style={styles.modalbody}>
+            <TouchableOpacity style={styles.modalCategoryContainer}>
+              <View style={styles.modalIcon}>
+                <Icons name="fastfood" size={35} color="white" />
+              </View>
+              <Text>食べ物</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.modalCategoryContainer}>
+              <View style={styles.modalIcon}>
+                <Icons name="directions-car" size={35} color="white" />
+              </View>
+              <Text>交通</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.modalCategoryContainer}>
+              <View style={styles.modalIcon}>
+                <Icons name="smoking-rooms" size={35} color="white" />
+              </View>
+              <Text>タバコ</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.modalCategoryContainer}>
+              <View style={styles.modalIcon}>
+                <Icons name="attach-money" size={35} color="white" />
+              </View>
+              <Text>お金</Text>
+            </TouchableOpacity>
           </View>
         }
       />
-       */}
     </View>
   );
 };
@@ -121,27 +135,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 30,
   },
-  box: {
-    height: 50,
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-    zIndex: 10,
-  },
-  boxWrapper: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  body: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   icon: {
     backgroundColor: Colors.primaryColor,
     borderRadius: 30,
@@ -149,6 +142,39 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
     width: 35,
+  },
+  //   ここからはModalのスタイル
+  modalheader: {
+    alignItems: 'center',
+  },
+  modalbody: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalheaderText: {
+    fontSize: 18,
+    fontWeight: '500',
+    paddingVertical: 10,
+  },
+  modalCategoryContainer: {
+    alignItems: 'center',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    borderTopRightRadius: 50,
+    width: '100%',
+  },
+  modalIcon: {
+    backgroundColor: Colors.primaryColor,
+    borderRadius: 30,
+    padding: 5,
+    marginHorizontal: 15,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
