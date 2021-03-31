@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {
   View,
   Text,
@@ -12,8 +12,12 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../constants/Color';
 import OffProfitButton from '../../components/UI/Buttons/OffProfitButton';
 import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
+import ProfitButton from '../../components/UI/Buttons/ProfitButton';
+import WarnButton from '../../components/UI/Buttons/WarnButton';
 
 const PostScreen: FC = () => {
+  const [info, setInfo] = useState<string | null>(null);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -37,10 +41,19 @@ const PostScreen: FC = () => {
         </View>
       </View>
       <View style={styles.infoArea}>
-        <Text>どんなTips?</Text>
-        <OffProfitButton />
-        <OffWarnButton />
+        <Text style={styles.infoText}>どんなTips?</Text>
+        <View style={styles.infoButtonContainer}>
+          <TouchableOpacity
+            onPress={() => setInfo('profit')}
+            style={styles.infoButton}>
+            {info === 'profit' ? <ProfitButton /> : <OffProfitButton />}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setInfo('warn')}>
+            {info === 'warn' ? <WarnButton /> : <OffWarnButton />}
+          </TouchableOpacity>
+        </View>
       </View>
+      <View></View>
     </SafeAreaView>
   );
 };
@@ -85,6 +98,21 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
+  },
+  infoArea: {
+    marginVertical: 10,
+    marginLeft: 25,
+  },
+  infoText: {
+    color: 'gray',
+    fontSize: 14,
+  },
+  infoButtonContainer: {
+    flexDirection: 'row',
+    padding: 5,
+  },
+  infoButton: {
+    paddingRight: 10,
   },
 });
 
