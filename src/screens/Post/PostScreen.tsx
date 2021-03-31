@@ -17,6 +17,9 @@ import WarnButton from '../../components/UI/Buttons/WarnButton';
 
 const PostScreen: FC = () => {
   const [info, setInfo] = useState<string | null>(null);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [iconName, setIconName] = useState<string | null>(null);
+  const [text, setText] = useState<string | null>(null);
 
   return (
     <SafeAreaView style={styles.container}>
