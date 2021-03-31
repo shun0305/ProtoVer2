@@ -10,6 +10,8 @@ import {
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
+import OffProfitButton from '../../components/UI/Buttons/OffProfitButton';
+import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
 
 const PostScreen: FC = () => {
   return (
@@ -36,6 +38,8 @@ const PostScreen: FC = () => {
       </View>
       <View style={styles.infoArea}>
         <Text>どんなTips?</Text>
+        <OffProfitButton />
+        <OffWarnButton />
       </View>
     </SafeAreaView>
   );
