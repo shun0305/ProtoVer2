@@ -17,12 +17,12 @@ const InputView: FC = props => {
       <View style={styles.screen}>
         <TextInput
           value={props.value}
-          placeholder="What is going on ?"
+          placeholder="あなたが見つけたTipsを共有しよう"
           placeholderTextColor="gray"
           keyboardType="default"
           numberOfLines={5}
           multiline={true}
-          style={{fontSize: 20}}
+          style={styles.inputText}
           onChangeText={props.setText}
         />
       </View>
@@ -34,21 +34,24 @@ const styles = StyleSheet.create({
   screenContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
+    marginLeft: 10,
   },
   screen: {
-    borderColor: Colors.primaryColor,
-    borderWidth: 1,
     width: '82%',
     height: 300,
   },
   icon: {
     backgroundColor: Colors.primaryColor,
-    borderRadius: 10,
+    borderRadius: 50,
     padding: 5,
     marginRight: 10,
     marginLeft: 10,
     width: 35,
     height: 35,
+  },
+  inputText: {
+    fontSize: 18,
+    width: '90%',
   },
 });
 

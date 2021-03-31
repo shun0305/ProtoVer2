@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
-import Colors from '../../constants/Color';
+import Colors from '../../../constants/Color';
 
 const CategoryModal: FC = props => {
   function selectFoodIcon() {

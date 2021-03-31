@@ -15,14 +15,22 @@ import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
 import ProfitButton from '../../components/UI/Buttons/ProfitButton';
 import WarnButton from '../../components/UI/Buttons/WarnButton';
 import InputView from './InputView';
-import CategoryModal from './CategoryModal';
+import CategoryModal from '../../components/UI/Modal/CategoryModal';
 
 const PostScreen: FC = () => {
   const [info, setInfo] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [iconName, setIconName] = useState<string | null>(null);
   const [text, setText] = useState<string | null>(null);
+  function setWarn() {
+    setInfo('warn');
+    setModalVisible(true);
+  }
 
+  function setProfit() {
+    setInfo('profit');
+    setModalVisible(true);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -49,11 +57,11 @@ const PostScreen: FC = () => {
         <Text style={styles.infoText}>どんなTips?</Text>
         <View style={styles.infoButtonContainer}>
           <TouchableOpacity
-            onPress={() => setInfo('profit')}
+            onPress={() => setProfit()}
             style={styles.infoButton}>
             {info === 'profit' ? <ProfitButton /> : <OffProfitButton />}
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setInfo('warn')}>
+          <TouchableOpacity onPress={() => setWarn()}>
             {info === 'warn' ? <WarnButton /> : <OffWarnButton />}
           </TouchableOpacity>
         </View>
