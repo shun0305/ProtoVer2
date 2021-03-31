@@ -22,7 +22,13 @@ const SearchListScreen: FC = props => {
         horizontal={true}
         data={categories}
         renderItem={({item}) => (
-          <TouchableOpacity style={{backgroundColor: 'white'}}>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate('category', {
+                category: item.category,
+              })
+            }
+            style={{backgroundColor: 'white'}}>
             <Button style={styles.categoryContainer}>
               <Icons name={item.icon} color={Colors.primaryColor} size={35} />
               <Text style={styles.categorytext}>{item.category}</Text>
