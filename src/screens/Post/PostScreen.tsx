@@ -14,6 +14,8 @@ import OffProfitButton from '../../components/UI/Buttons/OffProfitButton';
 import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
 import ProfitButton from '../../components/UI/Buttons/ProfitButton';
 import WarnButton from '../../components/UI/Buttons/WarnButton';
+import InputView from './InputView';
+import CategoryModal from './CategoryModal';
 
 const PostScreen: FC = () => {
   const [info, setInfo] = useState<string | null>(null);
@@ -56,7 +58,22 @@ const PostScreen: FC = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View></View>
+      <View>
+        <InputView
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          iconName={iconName}
+          setText={setText}
+          text={text}
+          value={text}
+        />
+        <CategoryModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          iconName={iconName}
+          setIconName={setIconName}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -108,7 +125,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     color: 'gray',
-    fontSize: 14,
+    fontSize: 16,
   },
   infoButtonContainer: {
     flexDirection: 'row',

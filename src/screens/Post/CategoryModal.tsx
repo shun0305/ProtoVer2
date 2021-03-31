@@ -38,32 +38,27 @@ const CategoryModal: FC = props => {
         visible={props.modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Choose Category</Text>
+            <Text style={styles.modalText}>カテゴリーを選択</Text>
             <View style={styles.iconContainer}>
               <TouchableOpacity
                 onPress={() => selectFoodIcon()}
                 style={styles.icon}>
-                <Icons name="fastfood" size={24} color="white" />
+                <Icons name="fastfood" size={35} color="white" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => selectCarIcon()}
                 style={styles.icon}>
-                <Icons name="directions-car" size={24} color="white" />
+                <Icons name="directions-car" size={35} color="white" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => selectSmokeIcon()}
                 style={styles.icon}>
-                <Icons name="smoking-rooms" size={24} color="white" />
+                <Icons name="smoking-rooms" size={35} color="white" />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => selectMoneyIcon()}
                 style={styles.icon}>
-                <Icons name="attach-money" size={24} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => selectWcIcon()}
-                style={styles.icon}>
-                <Icons name="wc" size={24} color="white" />
+                <Icons name="attach-money" size={35} color="white" />
               </TouchableOpacity>
             </View>
           </View>
@@ -77,15 +72,15 @@ const styles = StyleSheet.create({
   centeredView: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 250,
+    marginTop: 200,
   },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    width: '90%',
+    width: '97%',
     height: 300,
-    padding: 35,
+    padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -97,15 +92,20 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
+    fontSize: 18,
+    fontWeight: '400',
     marginBottom: 15,
     textAlign: 'center',
   },
   icon: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.primaryColor,
-    borderRadius: 10,
+    borderRadius: 50,
     padding: 5,
-    marginRight: 10,
-    marginLeft: 10,
+    marginHorizontal: 15,
   },
   iconContainer: {
     flexDirection: 'row',
