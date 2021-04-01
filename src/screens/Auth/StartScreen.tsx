@@ -8,7 +8,7 @@ import Button from '../../components/UI/Button';
 import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
 
 export interface StartProps {
-  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+  navigation: StackNavigationProp<AuthNavigatorParamsList, 'start'>;
 }
 
 const StartScreen: FC<StartProps> = props => {

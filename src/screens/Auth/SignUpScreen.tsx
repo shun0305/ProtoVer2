@@ -10,7 +10,7 @@ import SNS from '../../components/UI/SNS';
 import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
 
 export interface SignUpProps {
-  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+  navigation: StackNavigationProp<AuthNavigatorParamsList, 'signup'>;
 }
 
 const SignUpScreen: FC<SignUpProps> = props => {

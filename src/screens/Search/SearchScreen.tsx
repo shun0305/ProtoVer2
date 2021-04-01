@@ -1,12 +1,19 @@
 import React, {FC, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 
 import SearchBar from '../../components/UI/SearchBar';
 import Switch from '../../components/UI/Switch';
 import SearchListScreen from './SearchListScreen';
 import SearchMapScreen from './SearchMapScreen';
 
-const SearchScreen: FC = props => {
+export interface SearchProps {
+  navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
+}
+
+const SearchScreen: FC<SearchProps> = props => {
   const {navigation} = props;
   const [view, selectView] = useState<string>('list');
 

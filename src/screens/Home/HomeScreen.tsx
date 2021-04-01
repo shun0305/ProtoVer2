@@ -15,7 +15,7 @@ import {users} from '../../Data/UserData';
 import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 
 export interface HomeProps {
-  navigation: StackNavigationProp<AppNavigatorParamsList, 'depart'>;
+  navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
 }
 
 const HomeScreen: FC<HomeProps> = props => {
