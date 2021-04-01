@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-
+import {FIREBASE_API_KEY} from '@env';
 const MessageScreen: FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Message Screen</Text>
+      <Text>{FIREBASE_API_KEY}</Text>
     </View>
   );
 };
