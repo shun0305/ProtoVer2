@@ -6,6 +6,7 @@ import Colors from '../../constants/Color';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
+import firebase from '../../constants/firebase';
 
 import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
 
@@ -15,6 +16,28 @@ export interface SignUpProps {
 
 const SignUpScreen: FC<SignUpProps> = props => {
   const {navigation} = props;
+
+  function signUp() {
+    if (password === confPassword) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          res.user.updateProfile({
+            displayName: name,
+          });
+          if (res) {
+            console.log('Success to Signup');
+            props.navigation.navigate('signin');
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      alert('password is not same');
+    }
+  }
 
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
@@ -43,7 +66,7 @@ const SignUpScreen: FC<SignUpProps> = props => {
       <TouchableOpacity onPress={() => navigation.navigate('signin')}>
         <Text style={styles.login}>ログイン</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => signUp()}>
         <Button style={styles.signupButton}>
           <Text style={styles.buttonText}>新規登録</Text>
         </Button>

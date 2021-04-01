@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 import {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
@@ -14,7 +14,8 @@ const config = {
   storageBucket: FIREBASE_STORAGE_BUCKET,
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
-
-firebase.initializeApp(config);
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(config)
+  : firebase.app();
 
 export default firebase;
