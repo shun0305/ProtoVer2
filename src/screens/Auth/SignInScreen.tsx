@@ -6,19 +6,29 @@ import Colors from '../../constants/Color';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
+import firebase from '../../constants/firebase';
 
 import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
 
 export interface SignInProps {
-  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+  navigation: StackNavigationProp<AuthNavigatorParamsList, 'signin'>;
 }
 
 const SignInScreen: FC<SignInProps> = () => {
-  // const {navigation} = props;
-
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
 
+  function Login() {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(response => {
+        alert('Login Success!');
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>サービス名</Text>
@@ -34,7 +44,7 @@ const SignInScreen: FC<SignInProps> = () => {
         onChangeText={text => setPassword(text)}
       />
       <Text style={styles.forgetPassword}>パスワードを忘れた方</Text>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => Login()}>
         <Button style={styles.loginButton}>
           <Text style={styles.buttonText}>ログイン</Text>
         </Button>
