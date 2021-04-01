@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, Dispatch, SetStateAction} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
@@ -16,12 +17,24 @@ import ProfitButton from '../../components/UI/Buttons/ProfitButton';
 import WarnButton from '../../components/UI/Buttons/WarnButton';
 import InputView from './InputView';
 import CategoryModal from '../../components/UI/Modal/CategoryModal';
+import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 
-const PostScreen: FC = () => {
+interface PostScreenProps {
+  info: string | null;
+  setInfo: Dispatch<SetStateAction<string | null>>;
+  iconName: string;
+  setIconName: Dispatch<SetStateAction<string | null>>;
+  text: string | null;
+  setText: Dispatch<SetStateAction<string | null>>;
+  navigation: StackNavigationProp<AppNavigatorParamsList>;
+}
+
+const PostScreen: FC<PostScreenProps> = () => {
   const [info, setInfo] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [iconName, setIconName] = useState<string | null>(null);
+  const [iconName, setIconName] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
+
   function setWarn() {
     setInfo('warn');
     setModalVisible(true);

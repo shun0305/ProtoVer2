@@ -1,13 +1,20 @@
 import React, {FC, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
 
-const SignInScreen: FC = props => {
-  const {navigation} = props;
+import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
+
+export interface SignInProps {
+  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+}
+
+const SignInScreen: FC<SignInProps> = () => {
+  // const {navigation} = props;
 
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);

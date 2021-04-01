@@ -7,6 +7,7 @@ import SearchListScreen from './SearchListScreen';
 import SearchMapScreen from './SearchMapScreen';
 
 const SearchScreen: FC = props => {
+  const {navigation} = props;
   const [view, selectView] = useState<string>('list');
 
   return (
@@ -17,7 +18,7 @@ const SearchScreen: FC = props => {
             <SearchBar placeholder="地名で検索" />
             <Switch selectView={selectView} />
           </View>
-          <SearchListScreen navigation={props.navigation} />
+          <SearchListScreen navigation={navigation} />
         </View>
       ) : (
         <View style={styles.container}>

@@ -1,12 +1,21 @@
 import React, {FC, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import SNS from '../../components/UI/SNS';
 
-const SignUpScreen: FC = props => {
+import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
+
+export interface SignUpProps {
+  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+}
+
+const SignUpScreen: FC<SignUpProps> = props => {
+  const {navigation} = props;
+
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
@@ -31,7 +40,7 @@ const SignUpScreen: FC = props => {
         placeholder="パスワード(確認用)"
         onChangeText={text => setConfPassword(text)}
       />
-      <TouchableOpacity onPress={() => props.navigation.navigate('signin')}>
+      <TouchableOpacity onPress={() => navigation.navigate('signin')}>
         <Text style={styles.login}>ログイン</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {}}>

@@ -1,29 +1,38 @@
-import React, {FC} from 'react';
+import React, {FC, Dispatch, SetStateAction} from 'react';
 import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
 
-const InputView: FC = props => {
+interface InputViewProp {
+  setModalVisible: (modalVisible: boolean) => void;
+  setText: Dispatch<SetStateAction<string | null>>;
+  modalVisible: boolean;
+  iconName: string;
+  value: string;
+}
+
+const InputView: FC<InputViewProp> = props => {
+  const {setModalVisible, setText, modalVisible, iconName, value} = props;
   return (
     <View style={styles.screenContainer}>
       <View>
         <TouchableOpacity
-          onPress={() => props.setModalVisible(!props.modalVisible)}
+          onPress={() => setModalVisible(!modalVisible)}
           style={styles.icon}>
-          <Icons name={props.iconName} size={24} color="white" />
+          <Icons name={iconName} size={24} color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.screen}>
         <TextInput
-          value={props.value}
+          value={value}
           placeholder="あなたが見つけたTipsを共有しよう"
           placeholderTextColor="gray"
           keyboardType="default"
           numberOfLines={5}
           multiline={true}
           style={styles.inputText}
-          onChangeText={props.setText}
+          onChangeText={setText}
         />
       </View>
     </View>

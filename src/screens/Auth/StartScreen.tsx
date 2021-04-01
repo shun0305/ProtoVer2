@@ -5,11 +5,13 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 
-// type Props = {
-//   navigation: StackNavigationProp;
-// };
+import {AuthNavigatorParamsList} from '../../types/NavigationTypes';
 
-const StartScreen: FC = props => {
+export interface StartProps {
+  navigation: StackNavigationProp<AuthNavigatorParamsList>;
+}
+
+const StartScreen: FC<StartProps> = props => {
   const {navigation} = props;
   return (
     <View style={styles.screen}>

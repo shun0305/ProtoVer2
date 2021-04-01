@@ -15,6 +15,7 @@ import {categories} from '../../Data/CategoryData';
 import {posts} from '../../Data/PostData';
 
 const SearchListScreen: FC = props => {
+  const {navigation} = props;
   return (
     <View style={styles.container}>
       <Text style={styles.header}>カテゴリーで検索</Text>
@@ -24,7 +25,7 @@ const SearchListScreen: FC = props => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate('category', {
+              navigation.navigate('category', {
                 category: item.category,
               })
             }
@@ -42,7 +43,7 @@ const SearchListScreen: FC = props => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate('detail', {
+              navigation.navigate('detail', {
                 username: item.username,
                 profileImage: item.profileImage,
                 content: item.content,

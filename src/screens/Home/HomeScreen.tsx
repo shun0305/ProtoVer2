@@ -7,13 +7,20 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
+import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 
-const HomeScreen: FC = props => {
+export interface HomeProps {
+  navigation: StackNavigationProp<AppNavigatorParamsList, 'depart'>;
+}
+
+const HomeScreen: FC<HomeProps> = props => {
   const isTraveling: boolean = false;
+  const {navigation} = props;
   return (
     <>
       {/* isTravelingのbooleanで表示変更 */}
@@ -23,7 +30,7 @@ const HomeScreen: FC = props => {
         {isTraveling !== true ? (
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('depart');
+              navigation.navigate('depart');
             }}>
             <Button style={styles.departButton}>
               <Text style={styles.buttonText}>出発する</Text>
@@ -32,7 +39,7 @@ const HomeScreen: FC = props => {
         ) : (
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('depart');
+              navigation.navigate('depart');
             }}>
             <Button style={styles.departingButton}>
               <Text style={styles.buttonText}>{users[0].place[0]}</Text>

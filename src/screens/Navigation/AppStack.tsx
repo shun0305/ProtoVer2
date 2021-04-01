@@ -1,9 +1,5 @@
 import React, {FC} from 'react';
-import {
-  createStackNavigator,
-  HeaderBackButton,
-  HeaderTitle,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import OnboardingScreen from '../Onboarding/OnboardingScreen';
 import Navigation from '../Navigation/Navigation';

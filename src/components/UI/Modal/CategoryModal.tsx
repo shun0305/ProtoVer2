@@ -4,30 +4,32 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../../constants/Color';
 
-const CategoryModal: FC = props => {
+interface CategoryModalProp {
+  modalVisible: boolean;
+  setModalVisible: (modalVisible: boolean) => void;
+  setIconName: () => void;
+}
+const CategoryModal: FC<CategoryModalProp> = props => {
+  const {setModalVisible, setIconName, modalVisible} = props;
+
   function selectFoodIcon() {
-    props.setModalVisible(!props.modalVisible);
-    props.setIconName('fastfood');
+    setModalVisible(!modalVisible);
+    setIconName('fastfood');
   }
 
   function selectCarIcon() {
-    props.setModalVisible(!props.modalVisible);
-    props.setIconName('directions-car');
+    setModalVisible(!modalVisible);
+    setIconName('directions-car');
   }
 
   function selectSmokeIcon() {
-    props.setModalVisible(!props.modalVisible);
-    props.setIconName('smoking-rooms');
+    setModalVisible(!modalVisible);
+    setIconName('smoking-rooms');
   }
 
   function selectMoneyIcon() {
-    props.setModalVisible(!props.modalVisible);
-    props.setIconName('attach-money');
-  }
-
-  function selectWcIcon() {
-    props.setModalVisible(!props.modalVisible);
-    props.setIconName('wc');
+    setModalVisible(!modalVisible);
+    setIconName('attach-money');
   }
 
   return (
