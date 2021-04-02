@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import OnboardingScreen from '../Onboarding/OnboardingScreen';
 import Navigation from '../Navigation/Navigation';
 import PostScreen from '../Post/PostScreen';
 import HomeDepartScreen from '../Home/HomeDepart';
@@ -13,7 +12,6 @@ const {Navigator, Screen} = createStackNavigator();
 const AppStack: FC = () => {
   return (
     <Navigator initialRouteName={'home'}>
-      <Screen name="onboading" component={OnboardingScreen} />
       <Screen
         name="home"
         component={Navigation}
