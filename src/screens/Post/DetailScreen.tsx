@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
@@ -38,7 +39,13 @@ const DetailScreen: FC<DetailProp> = props => {
     <View style={styles.container}>
       <View style={styles.userContainer}>
         <View style={styles.userContainerSub}>
-          <Image style={styles.image} source={{uri: profileImage}} />
+          {profileImage !== null ? (
+            <Image style={styles.image} source={{uri: profileImage}} />
+          ) : (
+            <View style={styles.imageNull}>
+              <Icons name="person" color="gray" size={45} />
+            </View>
+          )}
           <View>
             <Text style={styles.username}>{username}</Text>
             <Text style={styles.category}>{category}</Text>
@@ -76,6 +83,15 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 50,
     marginRight: 10,
+  },
+  imageNull: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    marginRight: 20,
+    backgroundColor: Colors.lightGray,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   username: {
     fontSize: 20,

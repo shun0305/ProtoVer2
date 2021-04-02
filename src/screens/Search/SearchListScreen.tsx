@@ -33,6 +33,7 @@ const SearchListScreen: FC = props => {
             address,
             date,
             profileImage,
+            username,
           } = doc.data();
           posts.push({
             id: doc.id,
@@ -42,6 +43,7 @@ const SearchListScreen: FC = props => {
             address,
             date,
             profileImage,
+            username,
           });
         });
         setPosts(posts);
@@ -75,7 +77,7 @@ const SearchListScreen: FC = props => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('detail', {
-                //username: item.username,
+                username: item.username,
                 profileImage: item.profileImage,
                 content: item.text,
                 place: item.address,

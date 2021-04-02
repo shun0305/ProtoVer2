@@ -119,6 +119,7 @@ const PostScreen: FC<PostProps> = props => {
         lng: Lng,
         address: address,
         profileImage: photoUrl,
+        username: name,
       });
       setText('');
       setIconName('');
