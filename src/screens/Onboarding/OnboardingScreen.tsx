@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     textAlign: 'center',
-    marginHorizontal: 60,
+    marginHorizontal: 70,
     marginTop: 20,
   },
   dotStyle: {
