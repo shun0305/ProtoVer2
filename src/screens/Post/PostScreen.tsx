@@ -1,13 +1,16 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
   StyleSheet,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
+import RNLocation from 'react-native-location';
+import Geocoder from 'react-native-geocoding';
 import {PostProps} from '../../types/DataTypes';
 
 import firebase from '../../constants/firebase';
@@ -25,6 +28,7 @@ const PostScreen: FC<PostProps> = props => {
   const [iconName, setIconName] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
   const [address, setAdress] = useState<string | null>(null);
+  const [geolocation, setGeolocation] = useState<object | null>(null);
 
   function setWarn() {
     setInfo('warn');
@@ -35,6 +39,63 @@ const PostScreen: FC<PostProps> = props => {
     setInfo('profit');
     setModalVisible(true);
   }
+
+  useEffect(() => {
+    (async () => {
+      // console.log('here');
+
+      let permission = await RNLocation.requestPermission({
+        ios: 'whenInUse',
+        android: {
+          detail: 'coarse',
+          rationale: {
+            title: 'We need to access your location',
+            message: 'We use your location to show where you are on the map',
+            buttonPositive: 'OK',
+            buttonNegative: 'Cancel',
+          },
+        },
+      });
+      let location;
+
+      if (!permission) {
+        permission = await RNLocation.requestPermission({
+          ios: 'whenInUse',
+          android: {
+            detail: 'coarse',
+            rationale: {
+              title: 'We need to access your location',
+              message: 'We use your location to show where you are on the map',
+              buttonPositive: 'OK',
+              buttonNegative: 'Cancel',
+            },
+          },
+        });
+        console.log(permission);
+        location = await RNLocation.getLatestLocation({timeout: 100});
+        console.log(
+          location,
+          location.longitude,
+          location.latitude,
+          location.timestamp,
+        );
+      } else {
+        console.log('Here 7');
+        location = await RNLocation.getLatestLocation({timeout: 100});
+        console.log(
+          location,
+          location.longitude,
+          location.latitude,
+          location.timestamp,
+        );
+        setGeolocation(location);
+      }
+
+      console.log('here2');
+      console.log(permission);
+      Alert.alert('okkkk');
+    })();
+  }, []);
 
   const postDataHandler = async () => {
     if (text === '') {
@@ -70,12 +131,11 @@ const PostScreen: FC<PostProps> = props => {
             size={24}
             style={styles.inputIcon}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="5th Ave Manhattan"
-            placeholderTextColor="gray"
-            onChangeText={setAdress}
-          />
+          {geolocation !== null ? (
+            <Text>{geolocation.longitude}</Text>
+          ) : (
+            <Text>現在地取得中</Text>
+          )}
         </View>
       </View>
       <View style={styles.infoArea}>
