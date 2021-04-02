@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Navigation from '../Navigation/Navigation';
 import PostScreen from '../Post/PostScreen';
+import SearchScreen from '../Search/SearchScreen';
 import HomeDepartScreen from '../Home/HomeDepart';
 import DetailScreen from '../Post/DetailScreen';
 import SearchCategoryScreen from '../Search/SearchCategoryScreen';
@@ -26,6 +27,7 @@ const AppStack: FC = () => {
         }}
       />
       <Screen name="post" component={PostScreen} />
+      <Screen name="search" component={SearchScreen} />
       <Screen
         name="detail"
         component={DetailScreen}

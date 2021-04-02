@@ -42,7 +42,7 @@ const SignUpScreen: FC<SignUpProps> = props => {
           Alert.alert('登録完了', 'Hava a Good Travel!!');
         }
       } catch (error) {
-        console.log(error);
+        Alert.alert(error);
       }
     } else {
       Alert.alert('Error', 'Password is not same');

@@ -10,6 +10,7 @@ import {
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {PostProps} from '../../types/DataTypes';
 
+import firebase from '../../constants/firebase';
 import Colors from '../../constants/Color';
 import OffProfitButton from '../../components/UI/Buttons/OffProfitButton';
 import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
@@ -18,11 +19,12 @@ import WarnButton from '../../components/UI/Buttons/WarnButton';
 import InputView from './InputView';
 import CategoryModal from '../../components/UI/Modal/CategoryModal';
 
-const PostScreen: FC<PostProps> = () => {
+const PostScreen: FC<PostProps> = props => {
   const [info, setInfo] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [iconName, setIconName] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
+  const [address, setAdress] = useState<string | null>(null);
 
   function setWarn() {
     setInfo('warn');
@@ -33,10 +35,30 @@ const PostScreen: FC<PostProps> = () => {
     setInfo('profit');
     setModalVisible(true);
   }
+
+  const postDataHandler = async () => {
+    if (text === '') {
+      alert('Please write something');
+    } else {
+      await firebase.firestore().collection('posts').add({
+        text: text,
+        info: info,
+        iconname: iconName,
+        date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
+        address: address,
+        // lat: Lat,
+        // lng: Lng,
+      });
+      setText('');
+      setIconName('');
+      alert('successed subimiting');
+      props.navigation.navigate('Search');
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.postButton}>
+        <TouchableOpacity style={styles.postButton} onPress={postDataHandler}>
           <Text style={styles.postText}>共有する</Text>
         </TouchableOpacity>
       </View>
@@ -52,6 +74,7 @@ const PostScreen: FC<PostProps> = () => {
             style={styles.input}
             placeholder="5th Ave Manhattan"
             placeholderTextColor="gray"
+            onChangeText={setAdress}
           />
         </View>
       </View>
