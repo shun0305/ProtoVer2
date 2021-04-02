@@ -46,7 +46,7 @@ const DetailScreen: FC<DetailProp> = props => {
         </View>
         <View>
           {info === 'warn' ? <WarnButton /> : <ProfitButton />}
-          <Text style={styles.time}>{time}</Text>
+          {/* <Text style={styles.time}>{time}</Text> */}
         </View>
       </View>
       <View style={styles.contentContainer}>

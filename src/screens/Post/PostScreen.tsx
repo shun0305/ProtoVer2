@@ -28,7 +28,7 @@ const PostScreen: FC<PostProps> = props => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [iconName, setIconName] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
-  const [geolocation, setGeolocation] = useState<object | null>(null);
+  // const [geolocation, setGeolocation] = useState<object | null>(null);
   const [Lat, setLat] = useState();
   const [Lng, setLng] = useState();
 
@@ -43,6 +43,17 @@ const PostScreen: FC<PostProps> = props => {
   function setProfit() {
     setInfo('profit');
     setModalVisible(true);
+  }
+
+  var user = firebase.auth().currentUser;
+  var name, email, photoUrl, uid, emailVerified;
+
+  if (user != null) {
+    name = user.displayName;
+    email = user.email;
+    photoUrl = user.photoURL;
+    emailVerified = user.emailVerified;
+    uid = user.uid;
   }
 
   useEffect(() => {
@@ -74,24 +85,13 @@ const PostScreen: FC<PostProps> = props => {
           },
         });
         location = await RNLocation.getLatestLocation({timeout: 100});
-        console.log(
-          location,
-          location.longitude,
-          location.latitude,
-          location.timestamp,
-        );
       } else {
         location = await RNLocation.getLatestLocation({timeout: 100});
-        console.log(
-          location,
-          location.longitude,
-          location.latitude,
-          location.timestamp,
-        );
-        setGeolocation(location);
+        // setGeolocation(location);
         setLat(location.latitude);
         setLng(location.longitude);
       }
+      // console.log(permission);
     })();
   }, []);
 
@@ -104,7 +104,7 @@ const PostScreen: FC<PostProps> = props => {
       setCity(cityName);
     })
     .catch(error => console.warn(error));
-  const adress = street + ' ' + city;
+  const address = street + ' ' + city;
 
   const postDataHandler = async () => {
     if (text === '') {
@@ -115,8 +115,10 @@ const PostScreen: FC<PostProps> = props => {
         info: info,
         iconname: iconName,
         date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
-        // lat: Lat,
-        // lng: Lng,
+        lat: Lat,
+        lng: Lng,
+        address: address,
+        profileImage: photoUrl,
       });
       setText('');
       setIconName('');
@@ -139,7 +141,11 @@ const PostScreen: FC<PostProps> = props => {
             size={24}
             style={styles.inputIcon}
           />
-          {adress !== null ? <Text>{adress}</Text> : <Text>現在地取得中</Text>}
+          {address !== null ? (
+            <Text>{address}</Text>
+          ) : (
+            <Text>現在地取得中</Text>
+          )}
         </View>
       </View>
       <View style={styles.infoArea}>

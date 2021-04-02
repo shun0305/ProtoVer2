@@ -32,7 +32,7 @@ const AppStack: FC = () => {
         name="detail"
         component={DetailScreen}
         options={({route}) => ({
-          title: route.params.place[0] + ',' + route.params.place[1],
+          title: route.params.place,
           headerBackTitleVisible: false,
         })}
       />

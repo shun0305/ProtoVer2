@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,44 @@ import {
 } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
+import firebase from '../../constants/firebase';
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 import {categories} from '../../Data/CategoryData';
-import {posts} from '../../Data/PostData';
+// import {posts} from '../../Data/PostData';
 
 const SearchListScreen: FC = props => {
   const {navigation} = props;
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('posts')
+      .onSnapshot(querySnapshot => {
+        const posts = [];
+        querySnapshot.docs.forEach(doc => {
+          const {
+            iconname,
+            text,
+            info,
+            address,
+            date,
+            profileImage,
+          } = doc.data();
+          posts.push({
+            id: doc.id,
+            iconname,
+            text,
+            info,
+            address,
+            date,
+            profileImage,
+          });
+        });
+        setPosts(posts);
+      });
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>カテゴリーで検索</Text>
@@ -44,25 +75,29 @@ const SearchListScreen: FC = props => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('detail', {
-                username: item.username,
+                //username: item.username,
                 profileImage: item.profileImage,
-                content: item.content,
-                place: item.place,
-                category: item.category,
+                content: item.text,
+                place: item.address,
+                category: item.iconname,
                 info: item.info,
-                time: item.time,
+                time: item.date,
               })
             }
             style={styles.listItemContainer}>
             <View style={styles.listUserContainer}>
-              <Image style={styles.image} source={{uri: item.profileImage}} />
+              {item.profileImage !== null ? (
+                <Image style={styles.image} source={{uri: item.profileImage}} />
+              ) : (
+                <View style={styles.imageNull}>
+                  <Icons name="person" color="gray" size={35} />
+                </View>
+              )}
               <View>
                 <Text numberOfLines={1} style={styles.listName}>
-                  {item.content}
+                  {item.text}
                 </Text>
-                <Text style={styles.listPlace}>
-                  {item.place[0]},{item.place[1]}
-                </Text>
+                <Text style={styles.listPlace}>{item.address}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -109,6 +144,15 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     marginRight: 20,
+  },
+  imageNull: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    marginRight: 20,
+    backgroundColor: Colors.lightGray,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   listName: {
     fontSize: 18,
