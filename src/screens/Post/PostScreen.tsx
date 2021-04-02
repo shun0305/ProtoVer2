@@ -14,6 +14,7 @@ import Geocoder from 'react-native-geocoding';
 import {PostProps} from '../../types/DataTypes';
 
 import firebase from '../../constants/firebase';
+import {GEOCODING_API} from '@env';
 import Colors from '../../constants/Color';
 import OffProfitButton from '../../components/UI/Buttons/OffProfitButton';
 import OffWarnButton from '../../components/UI/Buttons/OffWarnButton';
@@ -27,8 +28,12 @@ const PostScreen: FC<PostProps> = props => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [iconName, setIconName] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
-  const [address, setAdress] = useState<string | null>(null);
   const [geolocation, setGeolocation] = useState<object | null>(null);
+  const [Lat, setLat] = useState();
+  const [Lng, setLng] = useState();
+
+  const [street, setStreet] = useState();
+  const [city, setCity] = useState();
 
   function setWarn() {
     setInfo('warn');
@@ -42,8 +47,6 @@ const PostScreen: FC<PostProps> = props => {
 
   useEffect(() => {
     (async () => {
-      // console.log('here');
-
       let permission = await RNLocation.requestPermission({
         ios: 'whenInUse',
         android: {
@@ -57,7 +60,6 @@ const PostScreen: FC<PostProps> = props => {
         },
       });
       let location;
-
       if (!permission) {
         permission = await RNLocation.requestPermission({
           ios: 'whenInUse',
@@ -71,7 +73,6 @@ const PostScreen: FC<PostProps> = props => {
             },
           },
         });
-        console.log(permission);
         location = await RNLocation.getLatestLocation({timeout: 100});
         console.log(
           location,
@@ -80,7 +81,6 @@ const PostScreen: FC<PostProps> = props => {
           location.timestamp,
         );
       } else {
-        console.log('Here 7');
         location = await RNLocation.getLatestLocation({timeout: 100});
         console.log(
           location,
@@ -89,13 +89,22 @@ const PostScreen: FC<PostProps> = props => {
           location.timestamp,
         );
         setGeolocation(location);
+        setLat(location.latitude);
+        setLng(location.longitude);
       }
-
-      console.log('here2');
-      console.log(permission);
-      Alert.alert('okkkk');
     })();
   }, []);
+
+  Geocoder.init(GEOCODING_API, {language: 'ja'});
+  Geocoder.from(Lat, Lng)
+    .then(json => {
+      var streetName = json.results[0].address_components[2].short_name;
+      var cityName = json.results[0].address_components[5].short_name;
+      setStreet(streetName);
+      setCity(cityName);
+    })
+    .catch(error => console.warn(error));
+  const adress = street + ' ' + city;
 
   const postDataHandler = async () => {
     if (text === '') {
@@ -106,7 +115,6 @@ const PostScreen: FC<PostProps> = props => {
         info: info,
         iconname: iconName,
         date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
-        address: address,
         // lat: Lat,
         // lng: Lng,
       });
@@ -131,11 +139,7 @@ const PostScreen: FC<PostProps> = props => {
             size={24}
             style={styles.inputIcon}
           />
-          {geolocation !== null ? (
-            <Text>{geolocation.longitude}</Text>
-          ) : (
-            <Text>現在地取得中</Text>
-          )}
+          {adress !== null ? <Text>{adress}</Text> : <Text>現在地取得中</Text>}
         </View>
       </View>
       <View style={styles.infoArea}>
