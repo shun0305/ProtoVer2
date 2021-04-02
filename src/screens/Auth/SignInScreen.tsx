@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, Alert, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
@@ -18,17 +18,27 @@ const SignInScreen: FC<SignInProps> = () => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
 
-  function Login() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(response => {
-        alert('Login Success!');
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-  }
+  // function Login() {
+  //   firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then(response => {
+  //       alert('Login Success!');
+  //     })
+  //     .catch(error => {
+  //       alert(error.message);
+  //     });
+  // }
+
+  const login = async () => {
+    if (email && password) {
+      const {user} = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+    } else {
+      Alert.alert('Missing Fields');
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>サービス名</Text>
@@ -42,9 +52,10 @@ const SignInScreen: FC<SignInProps> = () => {
       <Input
         placeholder="パスワード"
         onChangeText={text => setPassword(text)}
+        secureTextEntry={true}
       />
       <Text style={styles.forgetPassword}>パスワードを忘れた方</Text>
-      <TouchableOpacity onPress={() => Login()}>
+      <TouchableOpacity onPress={login}>
         <Button style={styles.loginButton}>
           <Text style={styles.buttonText}>ログイン</Text>
         </Button>

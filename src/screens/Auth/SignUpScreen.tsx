@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, Alert, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import Colors from '../../constants/Color';
@@ -17,32 +17,59 @@ export interface SignUpProps {
 const SignUpScreen: FC<SignUpProps> = props => {
   const {navigation} = props;
 
-  function signUp() {
-    if (password === confPassword) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(res => {
-          res.user.updateProfile({
-            displayName: name,
-          });
-          if (res) {
-            console.log('Success to Signup');
-            props.navigation.navigate('signin');
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
-      alert('password is not same');
-    }
-  }
-
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [confPassword, setConfPassword] = useState<string | null>(null);
+
+  const signup = async () => {
+    if (password === confPassword) {
+      try {
+        const user = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(res => {
+            res.user.updateProfile({
+              displayName: name,
+            });
+          });
+        if (user) {
+          await firebase
+            .firestore()
+            .collection('users')
+            .doc(user.uid)
+            .set({name, email, password});
+          Alert.alert('登録完了', 'Hava a Good Travel!!');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.alert('Error', 'Password is not same');
+    }
+  };
+
+  // function signUp() {
+  //   if (password === confPassword) {
+  //     firebase
+  //       .auth()
+  //       .createUserWithEmailAndPassword(email, password)
+  //       .then(res => {
+  //         res.user.updateProfile({
+  //           displayName: name,
+  //         });
+  //         if (res) {
+  //           console.log('Success to Signup');
+  //           navigation.navigate('signin');
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  //   } else {
+  //     alert('password is not same');
+  //   }
+  // }
 
   return (
     <View style={styles.container}>
@@ -58,15 +85,17 @@ const SignUpScreen: FC<SignUpProps> = props => {
       <Input
         placeholder="パスワード"
         onChangeText={text => setPassword(text)}
+        secureTextEntry={true}
       />
       <Input
         placeholder="パスワード(確認用)"
         onChangeText={text => setConfPassword(text)}
+        secureTextEntry={true}
       />
       <TouchableOpacity onPress={() => navigation.navigate('signin')}>
         <Text style={styles.login}>ログイン</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => signUp()}>
+      <TouchableOpacity onPress={signup}>
         <Button style={styles.signupButton}>
           <Text style={styles.buttonText}>新規登録</Text>
         </Button>

@@ -3,7 +3,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 
 import firebase from '../../constants/firebase';
 
-const AccountScreen: FC = () => {
+const AccountScreen: FC = props => {
   var user = firebase.auth().currentUser;
   var name, email, photoUrl, uid, emailVerified;
 
@@ -17,20 +17,17 @@ const AccountScreen: FC = () => {
     // you have one. Use User.getToken() instead.
   }
 
-  function signOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log('sign out');
-      })
-      .catch(error => alert(error.message));
-  }
+  const signout = () => {
+    firebase.auth().signOut();
+  };
+
+  console.log(name);
 
   return (
     <View style={styles.container}>
       <Text>Account Screen</Text>
-      <Button title="sign out" onPress={() => signOut()} />
+      <Button title="sign out" onPress={signout} />
+      <Text>{name}</Text>
     </View>
   );
 };

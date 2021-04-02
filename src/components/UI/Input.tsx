@@ -16,6 +16,8 @@ const Input: FC<InputProps> = props => {
         placeholder={placeholder}
         secureTextEntry={secureTextEntry || false}
         onChangeText={onChangeText}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
     </View>
   );
