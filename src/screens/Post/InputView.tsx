@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: '82%',
-    height: 300,
+    // height: 300,
   },
   icon: {
     backgroundColor: Colors.primaryColor,

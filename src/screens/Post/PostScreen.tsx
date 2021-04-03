@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  Image,
   StyleSheet,
 } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import RNLocation from 'react-native-location';
 import Geocoder from 'react-native-geocoding';
+import ImagePicker from 'react-native-image-crop-picker';
 import {PostProps} from '../../types/DataTypes';
 
 import firebase from '../../constants/firebase';
@@ -34,6 +36,8 @@ const PostScreen: FC<PostProps> = props => {
 
   const [street, setStreet] = useState();
   const [city, setCity] = useState();
+
+  const [img, setImg] = useState(null);
 
   function setWarn() {
     setInfo('warn');
@@ -171,6 +175,32 @@ const PostScreen: FC<PostProps> = props => {
           text={text}
           value={text}
         />
+        {img && (
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={{uri: img.path}} />
+          </View>
+        )}
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() =>
+            ImagePicker.openPicker({
+              width: 1000,
+              height: 1000,
+              cropping: true,
+            }).then(image => {
+              // 画像トリミング後に行いたい処理を記述
+              console.log(image);
+              setImg(image);
+            })
+          }>
+          <Icons
+            name="add-photo-alternate"
+            color="gray"
+            size={35}
+            style={styles.inputIcon}
+          />
+        </TouchableOpacity>
+
         <CategoryModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
@@ -178,6 +208,7 @@ const PostScreen: FC<PostProps> = props => {
           setIconName={setIconName}
         />
       </View>
+      {/* ここから画像エリア */}
     </SafeAreaView>
   );
 };
@@ -197,12 +228,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.primaryColor,
     width: 70,
-    height: 30,
-    borderRadius: 15,
+    height: 35,
+    borderRadius: 20,
     marginRight: 15,
   },
   postText: {
     color: 'white',
+    fontWeight: '700',
   },
   inputArea: {
     alignItems: 'center',
@@ -237,6 +269,21 @@ const styles = StyleSheet.create({
   },
   infoButton: {
     paddingRight: 10,
+  },
+  imageButton: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 20,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+  },
+  image: {
+    width: '75%',
+    height: 180,
+    borderRadius: 15,
   },
 });
 
