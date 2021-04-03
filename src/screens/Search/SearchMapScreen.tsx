@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import MapView from 'react-native-map-clustering';
-import {Marker, Callout} from 'react-native-maps';
+import {Marker} from 'react-native-maps';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import firebase from '../../constants/firebase';
 
@@ -94,30 +94,6 @@ const SearchMapScreen = props => {
               key={item.id}
               coordinate={{latitude: item.lat, longitude: item.lng}}
               pinColor="#D2691E">
-              <Callout
-                style={styles.plainView}
-                // onPress={(e) => {
-                //   if (
-                //     e.nativeEvent.action === 'marker-inside-overlay-press' ||
-                //     e.nativeEvent.action === 'callout-inside-press'
-                //   ) {
-                //     return;
-                //   }
-                //  props.navigation.navigate('detail', {
-                //     username: item.username,
-                //     profileImage: item.profileImage,
-                //     content: item.text,
-                //     place: item.address,
-                //     category: item.iconname,
-                //     info: item.info,
-                //     time: item.date,
-                //   })
-                // }}
-              >
-                <View>
-                  <Text>this is plain view</Text>
-                </View>
-              </Callout>
               <View style={styles.icon}>
                 <Icons name={item.iconname} size={24} color="white" />
               </View>

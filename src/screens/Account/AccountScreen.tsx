@@ -6,14 +6,17 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import firebase from '../../constants/firebase';
+import EditButton from '../../components/UI/Buttons/EditButton';
 
 const AccountScreen: FC = props => {
   const [img, setImg] = useState(null);
+  const [imgURL, setImgURL] = useState(null);
 
   var user = firebase.auth().currentUser;
   var name, email, photoUrl, uid, emailVerified;
@@ -32,13 +35,46 @@ const AccountScreen: FC = props => {
     firebase.auth().signOut();
   };
 
-  console.log(name);
+  const uploadPostImg = async () => {
+    const metadata = {
+      contentType: 'image/jpeg',
+    };
+    const postIndex = Date.now().toString();
+    const storage = firebase.storage();
+    const imgURI = img.path;
+    const response = await fetch(imgURI);
+    const blob = await response.blob();
+    const uploadRef = storage.ref('images').child(`${postIndex}`);
+
+    // storageに画像を保存
+    await uploadRef.put(blob, metadata).catch(() => {
+      alert('画像の保存に失敗しました');
+    });
+
+    // storageのダウンロードURLをsetStateする
+    await uploadRef
+      .getDownloadURL()
+      .then(url => {
+        setImgURL(url);
+      })
+      .catch(() => {
+        alert('失敗しました');
+      });
+    console.log(imgURL);
+    await firebase.firestore().collection('users').add({
+      date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
+      profileImage: imgURL,
+      username: name,
+      userid: uid,
+    });
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>Account Screen</Text>
-      <Button title="sign out" onPress={signout} />
-      <Text>{name}</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>マイページ</Text>
+        <View style={styles.borderLine}></View>
+      </View>
       {img !== null ? (
         <TouchableOpacity
           style={styles.imageButton}
@@ -81,15 +117,34 @@ const AccountScreen: FC = props => {
           <Text>画像変更</Text>
         </TouchableOpacity>
       )}
-    </View>
+      <Text>{name}</Text>
+      <Text>ID:{uid}</Text>
+      <EditButton />
+      <Button title="sign out" onPress={signout} />
+      <Button title="firebaseに保存" onPress={uploadPostImg} />
+      <Image style={styles.image} source={{uri: imgURL}} />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  header: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: '600',
+    padding: 15,
+  },
+  borderLine: {
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    width: '100%',
   },
   image: {
     width: 50,
