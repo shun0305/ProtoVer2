@@ -85,6 +85,7 @@ const SearchMapScreen = props => {
       <Button onPress={() => openRef.current.snapTo(2)} title="modal" />
       <MapView
         ref={mapRef}
+        showsUserLocation={true}
         initialRegion={INITIAL_REGION}
         clusterColor={Colors.primaryColor}
         style={{width: 600, height: 900}}>

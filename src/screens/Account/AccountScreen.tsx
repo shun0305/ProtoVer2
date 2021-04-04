@@ -11,8 +11,10 @@ import {
 import ImagePicker from 'react-native-image-crop-picker';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
+import Colors from '../../constants/Color';
 import firebase from '../../constants/firebase';
 import EditButton from '../../components/UI/Buttons/EditButton';
+import AccountMap from './AccountMap';
 
 const AccountScreen: FC = props => {
   const [img, setImg] = useState(null);
@@ -73,53 +75,54 @@ const AccountScreen: FC = props => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>マイページ</Text>
-        <View style={styles.borderLine}></View>
+        <TouchableOpacity style={styles.editButton}>
+          <EditButton />
+        </TouchableOpacity>
       </View>
-      {img !== null ? (
-        <TouchableOpacity
-          style={styles.imageButton}
-          onPress={() =>
-            ImagePicker.openPicker({
-              width: 1000,
-              height: 1000,
-              cropping: true,
-              cropperCircleOverlay: true,
-            }).then(image => {
-              // 画像トリミング後に行いたい処理を記述
-              console.log(image);
-              setImg(image);
-            })
-          }>
-          <Image style={styles.image} source={{uri: img.path}} />
-          <Text>画像変更</Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          style={styles.imageButton}
-          onPress={() =>
-            ImagePicker.openPicker({
-              width: 1000,
-              height: 1000,
-              cropping: true,
-              cropperCircleOverlay: true,
-            }).then(image => {
-              // 画像トリミング後に行いたい処理を記述
-              console.log(image);
-              setImg(image);
-            })
-          }>
-          <Icons
-            name="add-photo-alternate"
-            color="gray"
-            size={35}
-            style={styles.inputIcon}
-          />
-          <Text>画像変更</Text>
-        </TouchableOpacity>
-      )}
-      <Text>{name}</Text>
-      <Text>ID:{uid}</Text>
-      <EditButton />
+
+      <View style={styles.userContainer}>
+        {img !== null ? (
+          <TouchableOpacity
+            style={styles.imageButton}
+            onPress={() =>
+              ImagePicker.openPicker({
+                width: 1000,
+                height: 1000,
+                cropping: true,
+                cropperCircleOverlay: true,
+              }).then(image => {
+                // 画像トリミング後に行いたい処理を記述
+                console.log(image);
+                setImg(image);
+              })
+            }>
+            <Image style={styles.image} source={{uri: img.path}} />
+            <Text>画像変更</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.imageNull}
+            onPress={() =>
+              ImagePicker.openPicker({
+                width: 1000,
+                height: 1000,
+                cropping: true,
+                cropperCircleOverlay: true,
+              }).then(image => {
+                // 画像トリミング後に行いたい処理を記述
+                console.log(image);
+                setImg(image);
+              })
+            }>
+            <Icons name="person" color="gray" size={50} />
+          </TouchableOpacity>
+        )}
+        <View>
+          <Text style={styles.username}>{name}</Text>
+          <Text style={styles.userid}>ID:{uid}</Text>
+        </View>
+      </View>
+      <AccountMap />
       <Button title="sign out" onPress={signout} />
       <Button title="firebaseに保存" onPress={uploadPostImg} />
       <Image style={styles.image} source={{uri: imgURL}} />
@@ -133,29 +136,48 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   header: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    flexDirection: 'row',
   },
   headerText: {
     fontSize: 24,
     fontWeight: '600',
-    padding: 15,
+    paddingTop: 15,
+    paddingLeft: '35%',
   },
-  borderLine: {
-    borderWidth: 0.5,
-    borderColor: 'gray',
-    width: '100%',
+  editButton: {
+    alignItems: 'flex-end',
+    paddingRight: 20,
+  },
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     borderRadius: 50,
+    margin: 10,
   },
   imageNull: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     borderRadius: 50,
-    backgroundColor: 'red',
+    backgroundColor: Colors.lightGray,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+  },
+  username: {
+    fontSize: 22,
+    fontWeight: '400',
+    paddingBottom: 5,
+  },
+  userid: {
+    fontSize: 12,
+    color: 'gray',
   },
 });
 

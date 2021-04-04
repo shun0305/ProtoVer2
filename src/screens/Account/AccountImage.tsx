@@ -12,13 +12,8 @@ const AccountImage: FC = props => {
           <Text>画像変更</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={styles.imageButton} onPress={() => {}}>
-          <Icons
-            name="add-photo-alternate"
-            color="gray"
-            size={35}
-            style={styles.inputIcon}
-          />
+        <TouchableOpacity style={styles.imageNull} onPress={() => {}}>
+          <Icons name="person" color="gray" size={35} />
           <Text>画像変更</Text>
         </TouchableOpacity>
       )}
