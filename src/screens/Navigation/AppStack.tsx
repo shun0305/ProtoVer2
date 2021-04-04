@@ -7,6 +7,7 @@ import SearchScreen from '../Search/SearchScreen';
 import HomeDepartScreen from '../Home/HomeDepart';
 import DetailScreen from '../Post/DetailScreen';
 import SearchCategoryScreen from '../Search/SearchCategoryScreen';
+import AccountEditScreen from '../Account/AccountEditScreen';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -43,6 +44,18 @@ const AppStack: FC = () => {
           title: route.params.category,
           headerBackTitleVisible: false,
         })}
+      />
+      <Screen
+        name="accountedit"
+        component={AccountEditScreen}
+        options={{
+          headerTitle: 'アカウント情報',
+          headerTitleStyle: {
+            fontSize: 22,
+            fontWeight: '600',
+          },
+          headerBackTitleVisible: false,
+        }}
       />
     </Navigator>
   );

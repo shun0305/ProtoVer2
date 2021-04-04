@@ -3,4 +3,5 @@ export default {
   accentColor: '#FF7800',
   redColor: '#F24A4A',
   lightGray: '#F5F2F2',
+  gray: '#aaaaaa',
 };

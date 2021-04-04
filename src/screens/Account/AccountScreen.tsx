@@ -75,7 +75,9 @@ const AccountScreen: FC = props => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>マイページ</Text>
-        <TouchableOpacity style={styles.editButton}>
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => props.navigation.navigate('accountedit')}>
           <EditButton />
         </TouchableOpacity>
       </View>
@@ -97,7 +99,6 @@ const AccountScreen: FC = props => {
               })
             }>
             <Image style={styles.image} source={{uri: img.path}} />
-            <Text>画像変更</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -115,6 +116,7 @@ const AccountScreen: FC = props => {
               })
             }>
             <Icons name="person" color="gray" size={50} />
+            <Text style={{fontSize: 10, color: 'gray'}}>画像変更</Text>
           </TouchableOpacity>
         )}
         <View>
