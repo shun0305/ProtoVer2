@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {View, Text, Button, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
@@ -13,10 +13,11 @@ const AccountEditScreen: FC = props => {
     name = user.displayName;
     email = user.email;
     uid = user.uid;
+    photoUrl = user.photoURL;
   }
 
   const logout = () => {
-    firebase.auth().logout();
+    firebase.auth().signOut();
   };
 
   return (
@@ -26,7 +27,17 @@ const AccountEditScreen: FC = props => {
           <Icons name="account-box" color="gray" size={30} />
           <Text style={styles.label}>ユーザー名</Text>
         </View>
-        <Text style={styles.username}>{name}</Text>
+        <Text style={styles.username}>{name} ▶︎</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.usernameContainer}>
+        <View style={styles.labelContainer}>
+          <Icons name="photo" color="gray" size={30} />
+          <Text style={styles.label}>ユーザー画像</Text>
+        </View>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{uri: photoUrl}} />
+          <Text style={styles.username}>▶︎</Text>
+        </View>
       </TouchableOpacity>
       <View style={styles.usernameContainer}>
         <View style={styles.labelContainer}>
@@ -76,6 +87,17 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 15,
     fontWeight: '500',
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    marginRight: 3,
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   userid: {
     fontSize: 12,

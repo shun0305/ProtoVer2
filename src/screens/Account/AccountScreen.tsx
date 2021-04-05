@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import Icons from 'react-native-vector-icons/MaterialIcons';
@@ -32,6 +33,19 @@ const AccountScreen: FC = props => {
     // this value to authenticate with your backend server, if
     // you have one. Use User.getToken() instead.
   }
+
+  const update = () => {
+    user
+      .updateProfile({
+        photoURL: imgURL,
+      })
+      .then(function () {
+        // Update successful.
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+  };
 
   const signout = () => {
     firebase.auth().signOut();
@@ -62,8 +76,11 @@ const AccountScreen: FC = props => {
       .catch(() => {
         alert('失敗しました');
       });
+  };
+
+  const uptofirebase = () => {
     console.log(imgURL);
-    await firebase.firestore().collection('users').add({
+    firebase.firestore().collection('users').add({
       date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
       profileImage: imgURL,
       username: name,
@@ -71,6 +88,9 @@ const AccountScreen: FC = props => {
     });
   };
 
+  const ale = () => {
+    Alert.alert('kokok');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -83,7 +103,7 @@ const AccountScreen: FC = props => {
       </View>
 
       <View style={styles.userContainer}>
-        {img !== null ? (
+        {photoUrl !== null ? (
           <TouchableOpacity
             style={styles.imageButton}
             onPress={() =>
@@ -92,13 +112,17 @@ const AccountScreen: FC = props => {
                 height: 1000,
                 cropping: true,
                 cropperCircleOverlay: true,
-              }).then(image => {
-                // 画像トリミング後に行いたい処理を記述
-                console.log(image);
-                setImg(image);
-              })
+              }).then(
+                image => {
+                  // 画像トリミング後に行いたい処理を記述
+                  console.log(image);
+                  setImg(image);
+                },
+                uploadPostImg,
+                uptofirebase,
+              )
             }>
-            <Image style={styles.image} source={{uri: img.path}} />
+            <Image style={styles.image} source={{uri: photoUrl}} />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -125,8 +149,9 @@ const AccountScreen: FC = props => {
         </View>
       </View>
       <AccountMap />
-      <Button title="sign out" onPress={signout} />
       <Button title="firebaseに保存" onPress={uploadPostImg} />
+      <Button title="firebaseにup" onPress={uptofirebase} />
+      <Button title="profileupdate" onPress={update} />
       <Image style={styles.image} source={{uri: imgURL}} />
     </SafeAreaView>
   );
