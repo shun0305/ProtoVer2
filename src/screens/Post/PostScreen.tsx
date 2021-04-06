@@ -38,6 +38,7 @@ const PostScreen: FC<PostProps> = props => {
   const [city, setCity] = useState();
 
   const [img, setImg] = useState(null);
+  const [imgURL, setImgURL] = useState(null);
 
   function setWarn() {
     setInfo('warn');
@@ -110,10 +111,61 @@ const PostScreen: FC<PostProps> = props => {
     .catch(error => console.warn(error));
   const address = street + ' ' + city;
 
+  const uploadPostImg = async () => {
+    const metadata = {
+      contentType: 'image/jpeg',
+    };
+    const postIndex = Date.now().toString();
+    const storage = firebase.storage();
+    const imgURI = img.path;
+    const response = await fetch(imgURI);
+    const blob = await response.blob();
+    const uploadRef = storage.ref('images').child(`${postIndex}`);
+
+    // storageに画像を保存
+    await uploadRef.put(blob, metadata).catch(() => {
+      alert('画像の保存に失敗しました');
+    });
+
+    // storageのダウンロードURLをsetStateする
+    await uploadRef
+      .getDownloadURL()
+      .then(url => {
+        setImgURL(url);
+      })
+      .catch(() => {
+        alert('失敗しました');
+      });
+  };
+
   const postDataHandler = async () => {
     if (text === '') {
       alert('Please write something');
     } else {
+      const metadata = {
+        contentType: 'image/jpeg',
+      };
+      const postIndex = Date.now().toString();
+      const storage = firebase.storage();
+      const imgURI = img.path;
+      const response = await fetch(imgURI);
+      const blob = await response.blob();
+      const uploadRef = storage.ref('images').child(`${postIndex}`);
+
+      // storageに画像を保存
+      await uploadRef.put(blob, metadata).catch(() => {
+        alert('画像の保存に失敗しました');
+      });
+
+      // storageのダウンロードURLをsetStateする
+      await uploadRef
+        .getDownloadURL()
+        .then(url => {
+          setImgURL(url);
+        })
+        .catch(() => {
+          alert('失敗しました');
+        });
       await firebase.firestore().collection('posts').add({
         text: text,
         info: info,
@@ -122,11 +174,13 @@ const PostScreen: FC<PostProps> = props => {
         lat: Lat,
         lng: Lng,
         address: address,
+        image: imgURL,
         profileImage: photoUrl,
         username: name,
       });
       setText('');
       setIconName('');
+      console.log(imgURL);
       alert('successed subimiting');
       props.navigation.navigate('Search');
     }
