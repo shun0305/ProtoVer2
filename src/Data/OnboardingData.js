@@ -1,7 +1,7 @@
 export default [
   {
     id: '1',
-    title: '〇〇〇とは',
+    title: 'Sengineとは',
     description: '旅先のささいな情報を得るのに最適なアプリです',
     image: require('../images/Exploring-pana.png'),
   },

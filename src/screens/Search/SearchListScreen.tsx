@@ -29,6 +29,7 @@ const SearchListScreen: FC = props => {
           const {
             iconname,
             text,
+            image,
             info,
             address,
             date,
@@ -39,6 +40,7 @@ const SearchListScreen: FC = props => {
             id: doc.id,
             iconname,
             text,
+            image,
             info,
             address,
             date,
@@ -80,6 +82,7 @@ const SearchListScreen: FC = props => {
                 username: item.username,
                 profileImage: item.profileImage,
                 content: item.text,
+                image: item.image,
                 place: item.address,
                 category: item.iconname,
                 info: item.info,

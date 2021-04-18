@@ -29,6 +29,7 @@ const DetailScreen: FC<DetailProp> = props => {
     username,
     content,
     place,
+    image,
     profileImage,
     category,
     info,
@@ -59,6 +60,11 @@ const DetailScreen: FC<DetailProp> = props => {
       <View style={styles.contentContainer}>
         <Text style={styles.content}>{content}</Text>
       </View>
+      {image && (
+        <View style={styles.imageContainer}>
+          <Image style={styles.imagePost} source={{uri: image}} />
+        </View>
+      )}
     </View>
   );
 };
@@ -110,6 +116,16 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 18,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+  },
+  imagePost: {
+    width: '75%',
+    height: 180,
+    borderRadius: 15,
   },
 });
 

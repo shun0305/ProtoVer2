@@ -20,7 +20,7 @@ const StartScreen: FC<StartProps> = props => {
           source={require('../../images/Destination.png')}
           style={styles.image}
         />
-        <Text style={styles.title}>サービス名</Text>
+        <Text style={styles.title}>Sengine</Text>
       </View>
       <View style={styles.bottomAreaBack}>
         <View style={styles.header}>
@@ -59,10 +59,10 @@ const styles = StyleSheet.create({
     height: 550,
   },
   title: {
-    fontSize: 40,
+    fontSize: 70,
     fontWeight: 'bold',
     color: 'white',
-    marginTop: 125,
+    marginTop: 175,
   },
   image: {
     width: 700,
