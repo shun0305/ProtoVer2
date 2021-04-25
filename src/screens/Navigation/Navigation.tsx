@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
@@ -7,7 +7,6 @@ import Colors from '../../constants/Color';
 import HomeScreen from '../Home/HomeScreen';
 import SearchScreen from '../Search/SearchScreen';
 import PostScreen from '../Post/PostScreen';
-import MessageScreen from '../Message/MessageScreen';
 import AccountScreen from '../Account/AccountScreen';
 
 const Tab = createBottomTabNavigator();
