@@ -39,7 +39,7 @@ const Navigation = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Post"
         component={PostScreen}
         options={{
@@ -50,8 +50,8 @@ const Navigation = () => {
             </View>
           ),
         }}
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Message"
         component={MessageScreen}
         options={{
@@ -60,7 +60,7 @@ const Navigation = () => {
             <Icons name="message" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Account"
         component={AccountScreen}

@@ -13,6 +13,7 @@ import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 import {AppNavigatorParamsList} from '../../types/NavigationTypes';
+import FloatButton from '../../components/UI/Buttons/FloatButton';
 
 export interface HomeProps {
   navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
