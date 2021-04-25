@@ -1,10 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useRef} from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Image,
   FlatList,
+  Dimensions,
   StyleSheet,
 } from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -14,12 +15,20 @@ import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 import FloatButton from '../../components/UI/Buttons/FloatButton';
+import BottomModal from '../../components/UI/Modal/BottomModal';
 
 export interface HomeProps {
   navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
 }
 
+const Screen = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
+};
+const snapPoints = [0, Screen.height / 2, '90%', '100%'];
 const HomeScreen: FC<HomeProps> = props => {
+  const openRef = useRef<number | null>(null);
+
   const isTraveling: boolean = false;
   const {navigation} = props;
   return (
@@ -80,7 +89,8 @@ const HomeScreen: FC<HomeProps> = props => {
             </TouchableOpacity>
           )}
         />
-        <FloatButton />
+        <FloatButton openRef={openRef} />
+        <BottomModal snapPoints={snapPoints} openRef={openRef} />
       </View>
     </>
   );
