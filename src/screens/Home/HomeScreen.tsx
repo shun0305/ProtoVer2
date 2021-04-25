@@ -80,6 +80,7 @@ const HomeScreen: FC<HomeProps> = props => {
             </TouchableOpacity>
           )}
         />
+        <FloatButton />
       </View>
     </>
   );
