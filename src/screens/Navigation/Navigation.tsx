@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
@@ -38,7 +38,7 @@ const Navigation = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Post"
         component={PostScreen}
         options={{
@@ -49,7 +49,7 @@ const Navigation = () => {
             </View>
           ),
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name="Message"
         component={MessageScreen}

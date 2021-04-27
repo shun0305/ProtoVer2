@@ -15,7 +15,7 @@ import Button from '../../components/UI/Button';
 import {users} from '../../Data/UserData';
 import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 import FloatButton from '../../components/UI/Buttons/FloatButton';
-import BottomModal from '../../components/UI/Modal/BottomModal';
+import PostModal from '../../components/UI/Modal/PostModal';
 
 export interface HomeProps {
   navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
@@ -90,8 +90,8 @@ const HomeScreen: FC<HomeProps> = props => {
           )}
         />
         <FloatButton openRef={openRef} />
-        <BottomModal snapPoints={snapPoints} openRef={openRef} />
       </View>
+      <PostModal snapPoints={snapPoints} openRef={openRef} />
     </>
   );
 };

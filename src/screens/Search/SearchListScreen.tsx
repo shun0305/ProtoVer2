@@ -15,7 +15,12 @@ import Button from '../../components/UI/Button';
 import {categories} from '../../Data/CategoryData';
 // import {posts} from '../../Data/PostData';
 
-const SearchListScreen: FC = props => {
+type Props = {
+  username: string;
+  profileImage: string;
+};
+
+const SearchListScreen: FC<Props> = props => {
   const {navigation} = props;
   const [posts, setPosts] = useState([]);
 
@@ -72,42 +77,47 @@ const SearchListScreen: FC = props => {
           </TouchableOpacity>
         )}
       />
-      <Text style={styles.header}>最近の投稿</Text>
-      <FlatList
-        data={posts}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('detail', {
-                username: item.username,
-                profileImage: item.profileImage,
-                content: item.text,
-                image: item.image,
-                place: item.address,
-                category: item.iconname,
-                info: item.info,
-                time: item.date,
-              })
-            }
-            style={styles.listItemContainer}>
-            <View style={styles.listUserContainer}>
-              {item.profileImage !== null ? (
-                <Image style={styles.image} source={{uri: item.profileImage}} />
-              ) : (
-                <View style={styles.imageNull}>
-                  <Icons name="person" color="gray" size={35} />
+      <View style={{height: 550}}>
+        <Text style={styles.header}>最近の投稿</Text>
+        <FlatList
+          data={posts}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('detail', {
+                  username: item.username,
+                  profileImage: item.profileImage,
+                  content: item.text,
+                  image: item.image,
+                  place: item.address,
+                  category: item.iconname,
+                  info: item.info,
+                  time: item.date,
+                })
+              }
+              style={styles.listItemContainer}>
+              <View style={styles.listUserContainer}>
+                {item.profileImage !== null ? (
+                  <Image
+                    style={styles.image}
+                    source={{uri: item.profileImage}}
+                  />
+                ) : (
+                  <View style={styles.imageNull}>
+                    <Icons name="person" color="gray" size={35} />
+                  </View>
+                )}
+                <View>
+                  <Text numberOfLines={1} style={styles.listName}>
+                    {item.text}
+                  </Text>
+                  <Text style={styles.listPlace}>{item.address}</Text>
                 </View>
-              )}
-              <View>
-                <Text numberOfLines={1} style={styles.listName}>
-                  {item.text}
-                </Text>
-                <Text style={styles.listPlace}>{item.address}</Text>
               </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -115,6 +125,7 @@ const SearchListScreen: FC = props => {
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 15,
+    height: 680,
   },
   header: {
     fontSize: 21,

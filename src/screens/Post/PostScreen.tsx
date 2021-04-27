@@ -180,7 +180,7 @@ const PostScreen: FC<PostProps> = props => {
       });
       setText('');
       setIconName('');
-      console.log(imgURL);
+      setImg('');
       alert('successed subimiting');
       props.navigation.navigate('Search');
     }
@@ -188,6 +188,9 @@ const PostScreen: FC<PostProps> = props => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+        <TouchableOpacity style={styles.cancelButton} onPress={postDataHandler}>
+          <Text style={styles.cancelText}>キャンセル</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.postButton} onPress={postDataHandler}>
           <Text style={styles.postText}>共有する</Text>
         </TouchableOpacity>
@@ -273,7 +276,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   header: {
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -288,6 +291,21 @@ const styles = StyleSheet.create({
   },
   postText: {
     color: 'white',
+    fontWeight: '700',
+  },
+  cancelButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    width: 80,
+    height: 35,
+    borderRadius: 20,
+    borderColor: Colors.primaryColor,
+    borderWidth: 0.5,
+    marginLeft: 15,
+  },
+  cancelText: {
+    color: Colors.primaryColor,
     fontWeight: '700',
   },
   inputArea: {
