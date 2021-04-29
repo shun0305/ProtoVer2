@@ -8,8 +8,10 @@ import SearchBar from '../../components/UI/SearchBar';
 import Switch from '../../components/UI/Switch';
 import SearchListScreen from './SearchListScreen';
 import SearchMapScreen from './SearchMapScreen';
-import FloatButtonForSearch from '../../components/UI/Buttons/FloatButtonForSearch';
+import FloatButton from '../../components/UI/Buttons/FloatButton';
 import PostModal from '../../components/UI/Modal/PostModal';
+import BottomModal from '../../components/UI/Modal/BottomModal';
+import CategoryButton from '../../components/UI/Buttons/CategoryButton';
 
 export interface SearchProps {
   navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
@@ -18,10 +20,12 @@ const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
 };
-const snapPoints = [0, Screen.height / 2, '90%', '100%'];
+const snapPoints = [0, Screen.height / 1, '100%', '100%'];
+const snapPointsC = [0, Screen.height / 1, '45%', '100%'];
 
 const SearchScreen: FC<SearchProps> = props => {
   const openRef = useRef<number | null>(null);
+  const openRefC = useRef<number | null>(null);
 
   const {navigation} = props;
   const [view, selectView] = useState<string>('list');
@@ -42,10 +46,16 @@ const SearchScreen: FC<SearchProps> = props => {
             <SearchBar placeholder="地名で検索" />
             <Switch selectView={selectView} />
             <SearchMapScreen />
+            <View style={styles.lab}>
+              <CategoryButton openRef={openRefC} />
+            </View>
+            <BottomModal snapPoints={snapPointsC} openRef={openRefC} />
           </View>
         </View>
       )}
-      <FloatButtonForSearch openRef={openRef} />
+      <View style={styles.fab}>
+        <FloatButton openRef={openRef} />
+      </View>
       <PostModal snapPoints={snapPoints} openRef={openRef} />
     </View>
   );
@@ -63,6 +73,16 @@ const styles = StyleSheet.create({
   barAndButton: {
     alignItems: 'center',
     paddingBottom: 5,
+  },
+  fab: {
+    position: 'absolute',
+    right: 15,
+    top: 699,
+  },
+  lab: {
+    position: 'absolute',
+    left: 15,
+    top: 199,
   },
 });
 

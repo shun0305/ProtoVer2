@@ -1,33 +1,53 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {
   View,
   Text,
+  Button,
   TextInput,
+  Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import CountryPicker from 'react-native-country-picker-modal';
 
 import Colors from '../../constants/Color';
-import Button from '../../components/UI/Button';
 
 const HomeDepartScreen: FC = () => {
+  const [country, setCountry] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const switchVisible = () => setVisible(!visible);
   return (
     <View style={styles.container}>
-      <Text style={styles.explain}>行き先を選択してください</Text>
+      <Text style={styles.explain}>旅行する国を選択してください</Text>
       <View style={styles.inputScreen}>
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>国名</Text>
-          {/* 後々APIを使って選択式にする */}
-          <TextInput style={styles.input} />
+          <CountryPicker
+            onSelect={name => setCountry(name)}
+            withFlag={true}
+            translation="jpn"
+            visible={visible}
+            withFlagButton={true}
+            containerButtonStyle={{display: 'none'}}
+            onClose={() => setVisible(false)}
+            onOpen={() => setVisible(true)}
+          />
+          {country !== null ? (
+            <TouchableOpacity onPress={switchVisible}>
+              <Text style={{fontSize: 30}}>{country.name}</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={switchVisible} style={{borderWidth: 1}}>
+              <Text style={{fontSize: 30}}>kuni</Text>
+            </TouchableOpacity>
+          )}
+          <Text style={{fontSize: 25}}>へ行く</Text>
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}>都市名</Text>
-          <TextInput style={styles.input} />
-        </View>
-        <TouchableOpacity>
-          <Button style={styles.departButton}>
-            <Text style={styles.buttonText}>出発する</Text>
-          </Button>
+        <Image
+          style={{width: 150, height: 100}}
+          source={require('../../images/Exploring-pana.png')}
+        />
+        <TouchableOpacity style={styles.departButton}>
+          <Text style={styles.buttonText}>出発する</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -69,6 +89,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
+  },
+  button: {
+    shadowColor: 'gray',
+    shadowOpacity: 0.2,
+    shadowOffset: {width: 1, height: 2},
+    shadowRadius: 8,
+    elevation: 5,
+    borderRadius: 30,
+    backgroundColor: 'white',
   },
   buttonText: {
     fontSize: 20,

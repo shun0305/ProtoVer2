@@ -16,7 +16,7 @@ const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
 };
-const snapPoints = [0, Screen.height / 2, '55%', '100%'];
+const snapPoints = [0, Screen.height / 1, '35%', '100%'];
 const BottomModal: FC = props => {
   const openRef = useRef<number | null>(null);
 
@@ -24,7 +24,7 @@ const BottomModal: FC = props => {
     <BottomSheet
       bottomSheerColor="#FFFFFF"
       ref={props.openRef}
-      initialPosition={'55%'}
+      initialPosition={'35%'}
       snapPoints={props.snapPoints}
       isBackDrop={true}
       isBackDropDismissByPress={true}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: 'white',
-    borderTopRightRadius: 50,
+    // borderTopRightRadius: 50,
     width: '100%',
   },
   modalIcon: {

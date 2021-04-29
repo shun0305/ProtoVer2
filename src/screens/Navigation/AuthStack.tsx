@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import OnboardingScreen from '../Onboarding/OnboardingScreen';
+import FirstScreen from '../Onboarding/FirstScreen';
 import StartScreen from '../Auth/StartScreen';
 import SignInScreen from '../Auth/SignInScreen';
 import SignUpScreen from '../Auth/SignUpScreen';
@@ -10,7 +11,14 @@ const {Navigator, Screen} = createStackNavigator();
 
 const AuthStack: FC = props => {
   return (
-    <Navigator initialRouteName={'onboarding'}>
+    <Navigator initialRouteName={'first'}>
+      <Screen
+        name="first"
+        component={FirstScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Screen
         name="onboarding"
         component={OnboardingScreen}

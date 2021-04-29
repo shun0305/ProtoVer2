@@ -1,9 +1,8 @@
-import React, {useRef} from 'react';
-import {TouchableOpacity, Dimensions, StyleSheet} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../../constants/Color';
-import ButtomModal from '../../components/UI/Modal/BottomModal';
 
 // const Screen = {
 //   width: Dimensions.get('window').width,
@@ -23,15 +22,15 @@ const FloatButton = ({openRef}) => {
 };
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute',
+    // position: 'absolute',
     width: 50,
     height: 50,
     backgroundColor: Colors.primaryColor,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    right: 15,
-    top: 500,
+    // right: 15,
+    // top: 500,
   },
 });
 export default FloatButton;

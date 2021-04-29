@@ -25,7 +25,7 @@ const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
 };
-const snapPoints = [0, Screen.height / 2, '90%', '100%'];
+const snapPoints = [0, Screen.height / 1, '100%', '100%'];
 const HomeScreen: FC<HomeProps> = props => {
   const openRef = useRef<number | null>(null);
 
@@ -89,7 +89,9 @@ const HomeScreen: FC<HomeProps> = props => {
             </TouchableOpacity>
           )}
         />
-        <FloatButton openRef={openRef} />
+        <View style={styles.fab}>
+          <FloatButton openRef={openRef} />
+        </View>
       </View>
       <PostModal snapPoints={snapPoints} openRef={openRef} />
     </>
@@ -206,6 +208,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: Colors.primaryColor,
+  },
+  fab: {
+    position: 'absolute',
+    right: 15,
+    top: 500,
   },
 });
 

@@ -180,15 +180,18 @@ const PostScreen: FC<PostProps> = props => {
       });
       setText('');
       setIconName('');
-      setImg('');
-      alert('successed subimiting');
-      props.navigation.navigate('Search');
+      setImg(null);
+      setInfo(null);
+      Alert.alert('Tipsを共有したよ！');
+      props.openRef.current.snapTo(0);
     }
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.cancelButton} onPress={postDataHandler}>
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={() => props.openRef.current.snapTo(0)}>
           <Text style={styles.cancelText}>キャンセル</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.postButton} onPress={postDataHandler}>

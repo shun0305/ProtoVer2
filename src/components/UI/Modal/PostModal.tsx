@@ -42,7 +42,7 @@ const PostModal: FC = props => {
       //   }
       body={
         <View style={styles.modalbody}>
-          <PostScreen />
+          <PostScreen openRef={props.openRef} />
         </View>
       }
     />

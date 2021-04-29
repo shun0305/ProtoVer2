@@ -14,6 +14,7 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import firebase from '../../constants/firebase';
 
 import Colors from '../../constants/Color';
+import CategoryButton from '../../components/UI/Buttons/CategoryButton';
 import ButtomModal from '../../components/UI/Modal/BottomModal';
 
 const INITIAL_REGION = {
@@ -81,8 +82,10 @@ const SearchMapScreen = props => {
 
   return (
     <View>
-      <Button onPress={animateToRegion} title="move" />
-      <Button onPress={() => openRef.current.snapTo(2)} title="modal" />
+      {/* <Button onPress={animateToRegion} title="move" /> */}
+      {/* <View style={styles.fab}>
+        <CategoryButton openRef={openRef} />
+      </View> */}
       <MapView
         ref={mapRef}
         showsUserLocation={true}
@@ -102,7 +105,7 @@ const SearchMapScreen = props => {
           );
         })}
       </MapView>
-      <ButtomModal snapPoints={snapPoints} openRef={openRef} />
+      {/* <ButtomModal snapPoints={snapPoints} openRef={openRef} /> */}
     </View>
   );
 };
@@ -155,6 +158,11 @@ const styles = StyleSheet.create({
   },
   plainView: {
     width: 100,
+  },
+  fab: {
+    position: 'absolute',
+    left: 15,
+    top: 699,
   },
 });
 

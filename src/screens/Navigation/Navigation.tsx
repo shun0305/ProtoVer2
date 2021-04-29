@@ -38,7 +38,7 @@ const Navigation = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Post"
         component={PostScreen}
         options={{
@@ -49,7 +49,7 @@ const Navigation = () => {
             </View>
           ),
         }}
-      />
+      /> */}
       {/* <Tab.Screen
         name="Message"
         component={MessageScreen}
