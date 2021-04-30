@@ -5,6 +5,7 @@ import Navigation from '../Navigation/Navigation';
 import PostScreen from '../Post/PostScreen';
 import SearchScreen from '../Search/SearchScreen';
 import HomeDepartScreen from '../Home/HomeDepart';
+import DepartAnime from '../Home/DepartAnime';
 import DetailScreen from '../Post/DetailScreen';
 import SearchCategoryScreen from '../Search/SearchCategoryScreen';
 import AccountEditScreen from '../Account/AccountEditScreen';
@@ -26,6 +27,11 @@ const AppStack: FC = () => {
           headerTitle: 'ステータスを旅行中にする',
           headerBackTitleVisible: false,
         }}
+      />
+      <Screen
+        name="departanm"
+        component={DepartAnime}
+        options={{headerShown: false}}
       />
       <Screen name="post" component={PostScreen} />
       <Screen name="search" component={SearchScreen} />

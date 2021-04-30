@@ -82,10 +82,6 @@ const SearchMapScreen = props => {
 
   return (
     <View>
-      {/* <Button onPress={animateToRegion} title="move" /> */}
-      {/* <View style={styles.fab}>
-        <CategoryButton openRef={openRef} />
-      </View> */}
       <MapView
         ref={mapRef}
         showsUserLocation={true}
@@ -105,7 +101,6 @@ const SearchMapScreen = props => {
           );
         })}
       </MapView>
-      {/* <ButtomModal snapPoints={snapPoints} openRef={openRef} /> */}
     </View>
   );
 };

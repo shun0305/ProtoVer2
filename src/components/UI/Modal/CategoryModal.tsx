@@ -8,28 +8,33 @@ interface CategoryModalProp {
   modalVisible: boolean;
   setModalVisible: (modalVisible: boolean) => void;
   setIconName: () => void;
+  setCategory: () => void;
 }
 const CategoryModal: FC<CategoryModalProp> = props => {
-  const {setModalVisible, setIconName, modalVisible} = props;
+  const {setModalVisible, setIconName, setCategory, modalVisible} = props;
 
   function selectFoodIcon() {
     setModalVisible(!modalVisible);
     setIconName('fastfood');
+    setCategory('食べ物');
   }
 
   function selectCarIcon() {
     setModalVisible(!modalVisible);
     setIconName('directions-car');
+    setCategory('交通');
   }
 
   function selectSmokeIcon() {
     setModalVisible(!modalVisible);
     setIconName('smoking-rooms');
+    setCategory('タバコ');
   }
 
   function selectMoneyIcon() {
     setModalVisible(!modalVisible);
     setIconName('attach-money');
+    setCategory('お金');
   }
 
   return (

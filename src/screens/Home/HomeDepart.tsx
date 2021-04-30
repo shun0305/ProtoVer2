@@ -2,24 +2,49 @@ import React, {FC, useState} from 'react';
 import {
   View,
   Text,
-  Button,
+  Alert,
   TextInput,
   Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import CountryPicker from 'react-native-country-picker-modal';
+import Icons from 'react-native-vector-icons/MaterialIcons';
 
 import Colors from '../../constants/Color';
+import firebase from '../../constants/firebase';
 
-const HomeDepartScreen: FC = () => {
+const HomeDepartScreen: FC = props => {
   const [country, setCountry] = useState(null);
   const [visible, setVisible] = useState(false);
   const switchVisible = () => setVisible(!visible);
+  var user = firebase.auth().currentUser;
+  var name, photoUrl, uid, emailVerified;
+
+  if (user != null) {
+    name = user.displayName;
+    photoUrl = user.photoURL;
+    uid = user.uid;
+  }
+  const postDataHandler = async () => {
+    if (country === null) {
+      Alert.alert('行き先を選択してください');
+    } else {
+      await firebase.firestore().collection('departs').add({
+        date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
+        profileImage: photoUrl,
+        username: name,
+        uid: uid,
+        destination: country.name,
+      });
+      props.navigation.navigate('departanm');
+    }
+  };
+  console.log(country);
   return (
     <View style={styles.container}>
-      <Text style={styles.explain}>旅行する国を選択してください</Text>
       <View style={styles.inputScreen}>
+        <Text style={styles.explain}>旅行する国を選択してください</Text>
         <View style={styles.inputContainer}>
           <CountryPicker
             onSelect={name => setCountry(name)}
@@ -32,21 +57,37 @@ const HomeDepartScreen: FC = () => {
             onOpen={() => setVisible(true)}
           />
           {country !== null ? (
-            <TouchableOpacity onPress={switchVisible}>
+            <TouchableOpacity
+              onPress={switchVisible}
+              style={styles.selectContainer}>
+              <Icons
+                name="keyboard-arrow-down"
+                color={Colors.primaryColor}
+                size={46}
+              />
+
               <Text style={{fontSize: 30}}>{country.name}</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={switchVisible} style={{borderWidth: 1}}>
-              <Text style={{fontSize: 30}}>kuni</Text>
+            <TouchableOpacity
+              onPress={switchVisible}
+              style={styles.selectContainer}>
+              <Icons
+                name="keyboard-arrow-down"
+                color={Colors.primaryColor}
+                size={46}
+              />
+
+              <Text style={{fontSize: 30}}>______</Text>
             </TouchableOpacity>
           )}
-          <Text style={{fontSize: 25}}>へ行く</Text>
+          {/* <Text style={{fontSize: 25}}>へ行く</Text> */}
         </View>
         <Image
-          style={{width: 150, height: 100}}
+          style={{width: 350, height: 300}}
           source={require('../../images/Exploring-pana.png')}
         />
-        <TouchableOpacity style={styles.departButton}>
+        <TouchableOpacity style={styles.departButton} onPress={postDataHandler}>
           <Text style={styles.buttonText}>出発する</Text>
         </TouchableOpacity>
       </View>
@@ -69,6 +110,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 20,
+    alignItems: 'center',
   },
   text: {
     fontSize: 17,
@@ -103,6 +145,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: 'white',
+  },
+  selectContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 20,
   },
 });
 

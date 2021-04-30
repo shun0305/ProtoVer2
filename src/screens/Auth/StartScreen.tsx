@@ -20,7 +20,7 @@ const StartScreen: FC<StartProps> = props => {
           source={require('../../images/Destination.png')}
           style={styles.image}
         />
-        <Text style={styles.title}>Sengine</Text>
+        <Text style={styles.title}>Senjin</Text>
       </View>
       <View style={styles.bottomAreaBack}>
         <View style={styles.header}>

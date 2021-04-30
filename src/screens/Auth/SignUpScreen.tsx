@@ -73,7 +73,7 @@ const SignUpScreen: FC<SignUpProps> = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sengine</Text>
+      <Text style={styles.title}>Senjin</Text>
       <View style={styles.signupContainer}>
         <Text style={styles.signup}>新規登録</Text>
       </View>

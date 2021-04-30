@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   lab: {
     position: 'absolute',
     left: 15,
-    top: 199,
+    top: 120,
   },
 });
 

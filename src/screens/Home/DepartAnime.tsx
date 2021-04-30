@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AnimatedSplash from 'react-native-animated-splash-screen';
-import OnboardingScreen from './OnboardingScreen';
+import AppStack from '../Navigation/AppStack';
 import Colors from '../../constants/Color';
 
 const FirstScreen = props => {
@@ -8,17 +8,17 @@ const FirstScreen = props => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2000);
+    }, 1500);
   }, []);
   return (
     <AnimatedSplash
       translucent={true}
       isLoaded={isLoaded}
-      logoImage={require('../../images/Topp.png')}
-      backgroundColor={Colors.primaryColor}
-      logoHeight={350}
-      logoWidth={250}>
-      <OnboardingScreen navigation={props.navigation} />
+      logoImage={require('../../images/hagt.png')}
+      backgroundColor={'white'}
+      logoHeight={550}
+      logoWidth={360}>
+      <AppStack navigation={props.navigation} />
     </AnimatedSplash>
   );
 };

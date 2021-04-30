@@ -1,4 +1,4 @@
-import React, {FC, useRef} from 'react';
+import React, {FC, useRef, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import {users} from '../../Data/UserData';
 import {AppNavigatorParamsList} from '../../types/NavigationTypes';
 import FloatButton from '../../components/UI/Buttons/FloatButton';
 import PostModal from '../../components/UI/Modal/PostModal';
+import firebase from '../../constants/firebase';
 
 export interface HomeProps {
   navigation: StackNavigationProp<AppNavigatorParamsList, 'home'>;
@@ -28,9 +29,46 @@ const Screen = {
 const snapPoints = [0, Screen.height / 1, '100%', '100%'];
 const HomeScreen: FC<HomeProps> = props => {
   const openRef = useRef<number | null>(null);
+  const [departs, setDeparts] = useState([]);
+  const [like, setLike] = useState(false);
 
   const isTraveling: boolean = false;
   const {navigation} = props;
+
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('departs')
+      .onSnapshot(querySnapshot => {
+        const departs = [];
+        querySnapshot.docs.forEach(doc => {
+          const {date, profileImage, username, destination} = doc.data();
+          departs.push({
+            id: doc.id,
+            date,
+            profileImage,
+            username,
+            destination,
+          });
+        });
+        setDeparts(departs);
+      });
+  }, []);
+
+  // const likeHandler = () => {
+  //   setLike(true);
+  // };
+  // const nonLikeHandler = () => {
+  //   setLike(false);
+  // };
+  // const postLikeHandler = async () => {
+  //   await firebase.firestore().collection('likes').add({
+  //     date: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
+  //     uid: uid,
+  //     like: like,
+  //   });
+  // };
+
   return (
     <>
       {/* isTravelingのbooleanで表示変更 */}
@@ -69,24 +107,31 @@ const HomeScreen: FC<HomeProps> = props => {
         </View>
         {/* firebaseのデータに変更必要あり */}
         <FlatList
-          data={users}
+          data={departs}
           renderItem={({item}) => (
-            <TouchableOpacity style={styles.listItemContainer}>
-              <View style={styles.listUserContainer}>
+            <View style={styles.listItemContainer}>
+              <TouchableOpacity style={styles.listUserContainer}>
                 <Image style={styles.image} source={{uri: item.profileImage}} />
                 <View>
                   <Text style={styles.listName}>{item.username}</Text>
-                  <Text style={styles.listPlace}>
-                    {item.place[0]},{item.place[1]}
-                  </Text>
+                  <Text style={styles.listPlace}>{item.destination}</Text>
                 </View>
-              </View>
-              <TouchableOpacity>
-                <Button style={styles.listButton}>
-                  <Text style={styles.listButtonText}>GT</Text>
-                </Button>
               </TouchableOpacity>
-            </TouchableOpacity>
+
+              {like === false ? (
+                <TouchableOpacity>
+                  <Button style={styles.listButtonNon}>
+                    <Text style={styles.listButtonTextNon}>GT</Text>
+                  </Button>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity>
+                  <Button style={styles.listButton}>
+                    <Text style={styles.listButtonText}>GT</Text>
+                  </Button>
+                </TouchableOpacity>
+              )}
+            </View>
           )}
         />
         <View style={styles.fab}>
@@ -193,8 +238,25 @@ const styles = StyleSheet.create({
   listPlace: {
     fontSize: 16,
     fontWeight: '500',
+    marginTop: 5,
   },
   listButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    borderWidth: 0.5,
+    backgroundColor: Colors.primaryColor,
+    borderColor: Colors.primaryColor,
+    marginLeft: 15,
+  },
+  listButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  listButtonNon: {
     width: 40,
     height: 40,
     justifyContent: 'center',
@@ -204,7 +266,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.primaryColor,
     marginLeft: 15,
   },
-  listButtonText: {
+  listButtonTextNon: {
     fontSize: 18,
     fontWeight: 'bold',
     color: Colors.primaryColor,

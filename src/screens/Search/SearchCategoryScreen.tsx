@@ -14,8 +14,6 @@ import firebase from '../../constants/firebase';
 import Colors from '../../constants/Color';
 import Button from '../../components/UI/Button';
 import SearchBar from '../../components/UI/SearchBar';
-import WarnButton from '../../components/UI/Buttons/WarnButton';
-import ProfitButton from '../../components/UI/Buttons/ProfitButton';
 
 interface DetailProp {
   category: string;

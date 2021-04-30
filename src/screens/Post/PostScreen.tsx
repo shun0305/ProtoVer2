@@ -29,8 +29,8 @@ const PostScreen: FC<PostProps> = props => {
   const [info, setInfo] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [iconName, setIconName] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
   const [text, setText] = useState<string | null>(null);
-  // const [geolocation, setGeolocation] = useState<object | null>(null);
   const [Lat, setLat] = useState();
   const [Lng, setLng] = useState();
 
@@ -177,11 +177,13 @@ const PostScreen: FC<PostProps> = props => {
         image: imgURL,
         profileImage: photoUrl,
         username: name,
+        category: category,
       });
       setText('');
       setIconName('');
       setImg(null);
       setInfo(null);
+      setCategory('');
       Alert.alert('Tipsを共有したよ！');
       props.openRef.current.snapTo(0);
     }
@@ -266,6 +268,8 @@ const PostScreen: FC<PostProps> = props => {
           setModalVisible={setModalVisible}
           iconName={iconName}
           setIconName={setIconName}
+          category={category}
+          setCategory={setCategory}
         />
       </View>
       {/* ここから画像エリア */}

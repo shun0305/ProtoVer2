@@ -41,7 +41,7 @@ const SignInScreen: FC<SignInProps> = () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sengine</Text>
+      <Text style={styles.title}>Senjin</Text>
       <View style={styles.loginContainer}>
         <Text style={styles.login}>ログイン</Text>
       </View>
